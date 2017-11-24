@@ -66,6 +66,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpModule } from '@angular/http';
 import { EventComponent } from './views/event/event.component';
+import { loginService} from './views/pages/login/login.service';
+import{AutheService } from './views/pages/register/authe.service'
 @NgModule({
   imports: [
     BrowserModule,
@@ -83,7 +85,7 @@ import { EventComponent } from './views/event/event.component';
     ...APP_DIRECTIVES,
     EventComponent
   ],
-  providers: [{
+  providers: [loginService,AutheService,{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   }],

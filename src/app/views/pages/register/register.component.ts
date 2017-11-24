@@ -1,18 +1,18 @@
 import { Component, OnInit} from '@angular/core';
 import{ RegisterUser } from './registerOrganizerUser';
-import { RegisterService } from './register.service';
+import { AutheService } from './authe.service';
 import { Router } from '@angular/router';
 import {FormGroup,FormControl,Validators} from '@angular/forms';
-import { RegisterSP} from './registerSP';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  providers: [RegisterService]
+  providers: [AutheService]
 })
 
 export class RegisterComponent implements OnInit {
-   
+ isvaliedemail:boolean=false;  
 isfilled:boolean =false;
 ispasswordMatch:boolean =true;
 isServiceCatogory:boolean =false;
@@ -33,14 +33,14 @@ registeruser:RegisterUser ={
 
 isRegistrationFailed: boolean = false;
 
-  constructor( private registerservice:RegisterService, private router:Router) { 
+  constructor( private  autheService: AutheService, private router:Router) { 
 
   }
 
   ngOnInit(){
 
     if(localStorage.getItem("user")) {
-      //this.router.navigate(['dashboard']);
+      this.router.navigate(['dashboard']);
     }
   }
   
@@ -65,16 +65,22 @@ this.registeruser.usertype ="Admin";
 
 
 //register user
+validateEmail(email){
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+
+}
 
 register():void{
+  
   console.log("registration success");
   if(!this.registeruser.firstname || !this.registeruser.lastname || !this.registeruser.username || !this.registeruser.email|| !this.registeruser.password || !this.registeruser.confirmpassword){
         this.isfilled = true;
         console.log('not feeld'+this.isfilled);
-
   
-  
-  
+}
+if(!this.validateEmail(this.registeruser.email)){
+  console.log('invalide email');
 }
 if(this.registeruser.usertype==''){
   this.isusertype =true;
@@ -95,21 +101,28 @@ console.log('password null '+ this.registeruser.password);
 
 
 
+}else if(!this.validateEmail(this.registeruser.email)){
+  this.isvaliedemail =true
 }else{
-  this.registerservice.register(this.registeruser)
-  .then(data => {
-    console.log("registration success");
-    localStorage.setItem("user", JSON.stringify(data));
-    this.router.navigate(['/pages/login']);
-  })
-  .catch(error => {
-    console.log(error);
-    this.isRegistrationFailed = true;
-  });
+  this.autheService.registerUser(this.registeruser).subscribe(data=>{
+    console.log('data'+data);
+    if(data.success){
+      localStorage.setItem("user", JSON.stringify(data));
+      this.router.navigate(['/pages/login']);
+    }else{
+      console.log('error regsiter');
+      this.isRegistrationFailed = true;
+    }});
+  
+    }
+
+  }
+    
+ 
 
 }
 
-}
+
 
 
 }

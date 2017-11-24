@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { User} from './user';
 import {FormGroup,FormControl,Validator} from '@angular/forms';
-import {loginService} from'./login.service';
+import { AutheService } from '../register/authe.service';
 import { Router } from '@angular/router';
+import { routes } from 'app/app.routing';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [loginService]
+  providers: [AutheService]
 })
 
 
 export class LoginComponent implements OnInit {
   isLoginFailed:boolean =false;
-    
+   private usertype:string; 
 user:User ={
   username:"",
-  password:""
-
+  password:"",
+  usertype:""
 }
 
-  constructor(private loginService:loginService,private router:Router) { }
+  constructor(private autheService:AutheService,private router:Router) { }
  
   ngOnInit() {
     
@@ -28,20 +29,21 @@ user:User ={
   }
 
   login():void{
+
     console.log('in the login');
-    this.loginService.loginService(this.user)
-    .then(data => {
-      console.log("login success success");
-      localStorage.setItem("user", JSON.stringify(data));
-      this.router.navigate(['/dashboard']);
-    })
-    .catch(error => {
-      console.log(error);
-      this.isLoginFailed = true;
-      console.log('THE ERROR'+error);
+    console.log(this.user.username);
+    console.log(this.user.password);
+    this.autheService.authenticateUser(this.user).subscribe(data=>{
+      console.log(data);
+      if(data.success){
+       
+        localStorage.setItem("user", JSON.stringify(data));
+        this.router.navigate(['/dashboard']);
+      }else{
+        this.isLoginFailed =true;
+      }
     });
-
-
+      
   }
 
   register():void{

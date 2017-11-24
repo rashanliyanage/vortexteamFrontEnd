@@ -11,8 +11,6 @@ export class AppHeaderComponent {
   ) { }
 
   logout():void{
-    
-       
           localStorage.clear();
           this.router.navigate(['/pages/login']);
           window.location.reload();

@@ -22,7 +22,7 @@ export class RegisterService {
         return response.json().data as RegisterUser;
       })
       .catch(function(error) {
-        return Promise.reject(error.json().message)
+        return Promise.reject(error);
       });
   }
 

@@ -131,6 +131,7 @@
                 email is required.
                 </div>
               </div>
+              <div class="alert alert-danger" *ngIf="isvaliedemail">Invalide email. Try Again...</div>
               <div class="input-group mb-3">
                 <span class="input-group-addon"><i class="icon-lock"></i></span>
                 <input type="password" [(ngModel)]="registeruser.password" class="form-control" #password ="ngModel"placeholder="Password" required>

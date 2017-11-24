@@ -2,13 +2,15 @@ import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 // Import navigation elements
 import { navigation } from './../../_nav';
-
+import { navigationForSp }from './../../spnav';
+import { loginService } from '../../views/pages/login/login.service';
 @Component({
   selector: 'app-sidebar-nav',
   template: `
     <nav class="sidebar-nav">
       <ul class="nav">
-        <ng-template ngFor let-navitem [ngForOf]="navigation">
+      <div [ngSwitch]="isUserType">
+        <ng-template *ngSwitchCase="'sp'" ngFor let-navitem [ngForOf]="navigation">
           <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
           <ng-template [ngIf]="isTitle(navitem)">
             <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
@@ -17,13 +19,28 @@ import { navigation } from './../../_nav';
             <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>
           </ng-template>
         </ng-template>
+
+        <ng-template *ngSwitchCase="'organizer'" ngFor let-navitem [ngForOf]="navigationForSp">
+        <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
+        <ng-template [ngIf]="isTitle(navitem)">
+          <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
+        </ng-template>
+        <ng-template [ngIf]="!isDivider(navitem)&&!isTitle(navitem)">
+          <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>
+        </ng-template>
+      </ng-template>
+
+
+        </div>
       </ul>
-    </nav>`
+    </nav>`,
+    providers: [loginService]
+
 })
-export class AppSidebarNavComponent {
-
+export class AppSidebarNavComponent implements OnInit{
+  isUserType:string="organizer";
   public navigation = navigation;
-
+  public navigationForSp =navigationForSp;
   public isDivider(item) {
     return item.divider ? true : false
   }
@@ -32,7 +49,13 @@ export class AppSidebarNavComponent {
     return item.title ? true : false
   }
 
-  constructor() { }
+  ngOnInit(){
+    
+
+  }
+  constructor(private loginservice:loginService) { 
+    
+  }
 }
 
 import { Router } from '@angular/router';
