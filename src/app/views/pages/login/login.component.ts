@@ -14,7 +14,9 @@ import { routes } from 'app/app.routing';
 
 export class LoginComponent implements OnInit {
   isLoginFailed:boolean =false;
-   private usertype:string; 
+   private usertype:string;
+   private token:any;
+   private registeredUser:any; 
 user:User ={
   username:"",
   password:"",
@@ -36,7 +38,7 @@ user:User ={
     this.autheService.authenticateUser(this.user).subscribe(data=>{
       console.log(data);
       if(data.success){
-       
+       this.autheService.storeUserData(data.token,data.user.usertype,data.user);
         localStorage.setItem("user", JSON.stringify(data));
         this.router.navigate(['/dashboard']);
       }else{
@@ -45,6 +47,8 @@ user:User ={
     });
       
   }
+
+ 
 
   register():void{
     console.log('go to register');

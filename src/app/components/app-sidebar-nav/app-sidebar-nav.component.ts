@@ -10,7 +10,7 @@ import { loginService } from '../../views/pages/login/login.service';
     <nav class="sidebar-nav">
       <ul class="nav">
       <div [ngSwitch]="isUserType">
-        <ng-template *ngSwitchCase="'sp'" ngFor let-navitem [ngForOf]="navigation">
+        <ng-template *ngSwitchCase="'organizer'" ngFor let-navitem [ngForOf]="navigation">
           <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
           <ng-template [ngIf]="isTitle(navitem)">
             <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
@@ -20,7 +20,7 @@ import { loginService } from '../../views/pages/login/login.service';
           </ng-template>
         </ng-template>
 
-        <ng-template *ngSwitchCase="'organizer'" ngFor let-navitem [ngForOf]="navigationForSp">
+        <ng-template *ngSwitchCase="'service_provider'" ngFor let-navitem [ngForOf]="navigationForSp">
         <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
         <ng-template [ngIf]="isTitle(navitem)">
           <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
@@ -38,7 +38,8 @@ import { loginService } from '../../views/pages/login/login.service';
 
 })
 export class AppSidebarNavComponent implements OnInit{
-  isUserType:string="organizer";
+  isUserType:String;
+  
   public navigation = navigation;
   public navigationForSp =navigationForSp;
   public isDivider(item) {
@@ -50,8 +51,21 @@ export class AppSidebarNavComponent implements OnInit{
   }
 
   ngOnInit(){
-    
-
+  let  UserType:String =JSON.parse(localStorage.getItem('usertype'));
+  //UserType.replace(/['"]+/g, '');
+  console.log('adooddfdfd'+UserType);
+  if(UserType == "organizer"){
+    console.log('storeage'+this.isUserType);
+    this.isUserType =UserType;
+  }
+  if(UserType == "service_provider"){
+    console.log('in  '+UserType);
+    this.isUserType =UserType;
+    console.log('in the '+this.isUserType);
+  }
+  if(UserType.toString()==undefined){
+    console.log('undifined user');
+  }
   }
   constructor(private loginservice:loginService) { 
     
@@ -78,6 +92,9 @@ import { Router } from '@angular/router';
 })
 export class AppSidebarNavItemComponent {
   @Input() item: any;
+
+ 
+
 
   public hasClass() {
     return this.item.class ? true : false

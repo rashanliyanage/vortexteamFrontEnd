@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AutheService }from '../../views/pages/register/authe.service';
 @Component({
   selector: 'app-header',
   templateUrl: './app-header.component.html'
@@ -7,13 +8,16 @@ import { Router } from '@angular/router';
 export class AppHeaderComponent { 
 
   constructor(
-    private router: Router
+    private router: Router,
+    private autheService:AutheService
   ) { }
 
-  logout():void{
-          localStorage.clear();
-          this.router.navigate(['/pages/login']);
-          window.location.reload();
+  logout(){
+
+        this.autheService.logOut(); 
+      
+        return false; 
+         
         
       }
 

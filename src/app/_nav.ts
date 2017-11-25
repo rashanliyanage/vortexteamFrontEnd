@@ -1,6 +1,6 @@
 export const navigation = [
   {
-    name: 'Dashboard',
+    name: 'organizer',
     url: '/dashboard',
     icon: 'icon-speedometer',
     badge: {

@@ -1,6 +1,6 @@
 export const navigationForSp = [
     {
-      name: 'profile',
+      name: 'service provider',
       url: '/dashboard',
       icon: 'icon-speedometer',
       badge: {
