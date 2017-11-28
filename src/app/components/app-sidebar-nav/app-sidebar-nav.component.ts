@@ -1,14 +1,14 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
-import { ProfileService} from '../../services/profile.component.service';
+import {ProfileService} from '../../services/serviceProvider.service'
 // Import navigation elements
 class Url{
-  
+    success:boolean;
     status:string;
     message:string;
     photodata:string;
-  
+    
   }
 
 @Component({
@@ -28,6 +28,7 @@ export class AppSidebarNavComponent implements OnInit{
    message:string;
    photodata:string;
    url:Url = {
+    success:false,
     status: "",
     message:"",
     photodata:""
@@ -36,9 +37,25 @@ export class AppSidebarNavComponent implements OnInit{
    ngOnInit(){
    this.userType = JSON.parse(localStorage.getItem('usertype'));
     console.log('user'+this.userType);
+    if(this.userType == 'service_provider'){
+     this.getUserProfilePicture();
+
+    }
   
    }
-   
+   getUserProfilePicture(){
+    this.profileService.getUserProfilepicture()
+    .then(response=>{
+      this.url =response as Url;
+
+    }).catch(err=>{
+
+      console.log(err);
+
+    });
+
+
+   }
 
    viewButton(){
      this.isClickedButton =true;
@@ -68,8 +85,16 @@ export class AppSidebarNavComponent implements OnInit{
         console.log('err');
   
     })
+  //   this.profileService.uploadProfilePicture(formData)
+  //   .then(response=>{
+  //     this.url =response as Url;
+  //   console.log(this.url);
+  //   }).catch(err=>{
+  //     console.log(err);
+
+  //   });
   
-  }
+   }
   fileChangeEvent(fileInput: any) {
     
     this.filesToUpload = <Array<File>>fileInput.target.files;

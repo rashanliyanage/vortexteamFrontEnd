@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import{ RegisterUser } from './registerOrganizerUser';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/map';
+ 
 
 @Injectable()
 
