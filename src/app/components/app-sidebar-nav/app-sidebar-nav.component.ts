@@ -1,229 +1,89 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { Http } from '@angular/http';
+import { ProfileService} from '../../services/profile.component.service';
 // Import navigation elements
-import { navigation } from './../../_nav';
-import { navigationForSp }from './../../spnav';
-import { loginService } from '../../views/pages/login/login.service';
+class Url{
+  
+    status:string;
+    message:string;
+    photodata:string;
+  
+  }
+
 @Component({
   selector: 'app-sidebar-nav',
-  template: `
-    <nav class="sidebar-nav">
-      <ul class="nav">
-      <div [ngSwitch]="isUserType">
-        <ng-template *ngSwitchCase="'organizer'" ngFor let-navitem [ngForOf]="navigation">
-          <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
-          <ng-template [ngIf]="isTitle(navitem)">
-            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
-          </ng-template>
-          <ng-template [ngIf]="!isDivider(navitem)&&!isTitle(navitem)">
-            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>
-          </ng-template>
-        </ng-template>
-
-        <ng-template *ngSwitchCase="'service_provider'" ngFor let-navitem [ngForOf]="navigationForSp">
-        <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
-        <ng-template [ngIf]="isTitle(navitem)">
-          <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
-        </ng-template>
-        <ng-template [ngIf]="!isDivider(navitem)&&!isTitle(navitem)">
-          <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>
-        </ng-template>
-      </ng-template>
-
-
-        </div>
-      </ul>
-    </nav>`,
-    providers: [loginService]
+  templateUrl:'./app-sidebar-nav.componet.html',
+  styleUrls: ['./app-sidebar-nav.componet.scss'],
+  providers:[ProfileService] 
 
 })
+
 export class AppSidebarNavComponent implements OnInit{
-  isUserType:String;
+   userType:string;
+   isClickButtonAd:boolean =false;
+   isClickedButton:boolean=false;
+   filesToUpload: Array<File> = [];
+   status:string;
+   message:string;
+   photodata:string;
+   url:Url = {
+    status: "",
+    message:"",
+    photodata:""
+    }
+   constructor(private http:Http,private router:Router,private profileService:ProfileService){}
+   ngOnInit(){
+   this.userType = JSON.parse(localStorage.getItem('usertype'));
+    console.log('user'+this.userType);
   
-  public navigation = navigation;
-  public navigationForSp =navigationForSp;
-  public isDivider(item) {
-    return item.divider ? true : false
-  }
+   }
+   
 
-  public isTitle(item) {
-    return item.title ? true : false
+   viewButton(){
+     this.isClickedButton =true;
+   }
+   viewButtn_ad(){
+     this.isClickButtonAd=true;
+   }
+   uploadProfilePicture(){
+    console.log('in the upload call');
+    const formData: any = new FormData();
+    const files: Array<File> = this.filesToUpload;
+    console.log(files);
+    this.isClickedButton=false;
+    for(let i =0; i < files.length; i++){
+        formData.append("uploads[]", files[i], files[i]['name']);
+    }
+    console.log(formData);
+   
+    this.http.post('http://localhost:3000/api/profile/updateProfilePicture', formData).toPromise()
+    .then((response)=>{
+      console.log('here is'+response.json());
+      this.url =response.json() as Url ;
+  
+  
+    }).catch((err)=>{
+  
+        console.log('err');
+  
+    })
+  
   }
-
-  ngOnInit(){
-  let  UserType:String =JSON.parse(localStorage.getItem('usertype'));
-  //UserType.replace(/['"]+/g, '');
-  console.log('adooddfdfd'+UserType);
-  if(UserType == "organizer"){
-    console.log('storeage'+this.isUserType);
-    this.isUserType =UserType;
-  }
-  if(UserType == "service_provider"){
-    console.log('in  '+UserType);
-    this.isUserType =UserType;
-    console.log('in the '+this.isUserType);
-  }
-  if(UserType.toString()==undefined){
-    console.log('undifined user');
-  }
-  }
-  constructor(private loginservice:loginService) { 
+  fileChangeEvent(fileInput: any) {
     
+    this.filesToUpload = <Array<File>>fileInput.target.files;
+    
+    //this.product.photo = fileInput.target.files[0]['name'];
   }
+
+
+
 }
 
-import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-sidebar-nav-item',
-  template: `
-    <li *ngIf="!isDropdown(); else dropdown" [ngClass]="hasClass() ? 'nav-item ' + item.class : 'nav-item'">
-      <app-sidebar-nav-link [link]='item'></app-sidebar-nav-link>
-    </li>
-    <ng-template #dropdown>
-      <li [ngClass]="hasClass() ? 'nav-item nav-dropdown ' + item.class : 'nav-item nav-dropdown'"
-          [class.open]="isActive()"
-          routerLinkActive="open"
-          appNavDropdown>
-        <app-sidebar-nav-dropdown [link]='item'></app-sidebar-nav-dropdown>
-      </li>
-    </ng-template>
-    `
-})
-export class AppSidebarNavItemComponent {
-  @Input() item: any;
 
+ export const APP_SIDEBAR_NAV = [
+   AppSidebarNavComponent,
  
-
-
-  public hasClass() {
-    return this.item.class ? true : false
-  }
-
-  public isDropdown() {
-    return this.item.children ? true : false
-  }
-
-  public thisUrl() {
-    return this.item.url
-  }
-
-  public isActive() {
-    return this.router.isActive(this.thisUrl(), false)
-  }
-
-  constructor( private router: Router )  { }
-
-}
-
-@Component({
-  selector: 'app-sidebar-nav-link',
-  template: `
-    <a *ngIf="!isExternalLink(); else external"
-      [ngClass]="hasVariant() ? 'nav-link nav-link-' + link.variant : 'nav-link'"
-      routerLinkActive="active"
-      [routerLink]="[link.url]">
-      <i *ngIf="isIcon()" class="{{ link.icon }}"></i>
-      {{ link.name }}
-      <span *ngIf="isBadge()" [ngClass]="'badge badge-' + link.badge.variant">{{ link.badge.text }}</span>
-    </a>
-    <ng-template #external>
-      <a [ngClass]="hasVariant() ? 'nav-link nav-link-' + link.variant : 'nav-link'" href="{{link.url}}">
-        <i *ngIf="isIcon()" class="{{ link.icon }}"></i>
-        {{ link.name }}
-        <span *ngIf="isBadge()" [ngClass]="'badge badge-' + link.badge.variant">{{ link.badge.text }}</span>
-      </a>
-    </ng-template>
-  `
-})
-export class AppSidebarNavLinkComponent {
-  @Input() link: any;
-
-  public hasVariant() {
-    return this.link.variant ? true : false
-  }
-
-  public isBadge() {
-    return this.link.badge ? true : false
-  }
-
-  public isExternalLink() {
-    return this.link.url.substring(0, 4) === 'http' ? true : false
-  }
-
-  public isIcon() {
-    return this.link.icon ? true : false
-  }
-
-  constructor() { }
-}
-
-@Component({
-  selector: 'app-sidebar-nav-dropdown',
-  template: `
-    <a class="nav-link nav-dropdown-toggle" appNavDropdownToggle>
-      <i *ngIf="isIcon()" class="{{ link.icon }}"></i>
-      {{ link.name }}
-      <span *ngIf="isBadge()" [ngClass]="'badge badge-' + link.badge.variant">{{ link.badge.text }}</span>
-    </a>
-    <ul class="nav-dropdown-items">
-      <ng-template ngFor let-child [ngForOf]="link.children">
-        <app-sidebar-nav-item [item]='child'></app-sidebar-nav-item>
-      </ng-template>
-    </ul>
-  `
-})
-export class AppSidebarNavDropdownComponent {
-  @Input() link: any;
-
-  public isBadge() {
-    return this.link.badge ? true : false
-  }
-
-  public isIcon() {
-    return this.link.icon ? true : false
-  }
-
-  constructor() { }
-}
-
-@Component({
-  selector: 'app-sidebar-nav-title',
-  template: ''
-})
-export class AppSidebarNavTitleComponent implements OnInit {
-  @Input() title: any;
-
-  constructor(private el: ElementRef, private renderer: Renderer2) { }
-
-  ngOnInit() {
-    const nativeElement: HTMLElement = this.el.nativeElement;
-    const li = this.renderer.createElement('li');
-    const name = this.renderer.createText(this.title.name);
-
-    this.renderer.addClass(li, 'nav-title');
-
-    if ( this.title.class ) {
-      const classes = this.title.class;
-      this.renderer.addClass(li, classes);
-    }
-
-    if ( this.title.wrapper ) {
-      const wrapper = this.renderer.createElement(this.title.wrapper.element);
-
-      this.renderer.appendChild(wrapper, name);
-      this.renderer.appendChild(li, wrapper);
-    } else {
-      this.renderer.appendChild(li, name);
-    }
-    this.renderer.appendChild(nativeElement, li)
-  }
-}
-
-export const APP_SIDEBAR_NAV = [
-  AppSidebarNavComponent,
-  AppSidebarNavDropdownComponent,
-  AppSidebarNavItemComponent,
-  AppSidebarNavLinkComponent,
-  AppSidebarNavTitleComponent
-];
+ ];

@@ -20,11 +20,10 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TabsComponent } from './tabs.component';
 
 // Components Routing
-import { ComponentsRoutingModule } from './components-routing.module';
+
 
 @NgModule({
   imports: [
-    ComponentsRoutingModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     TabsModule

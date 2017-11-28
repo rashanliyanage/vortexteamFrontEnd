@@ -18,42 +18,32 @@ const APP_CONTAINERS = [
 // Import components
 import {
   AppAsideComponent,
-  
   AppFooterComponent,
   AppHeaderComponent,
   AppSidebarComponent,
   AppSidebarFooterComponent,
-  AppSidebarFormComponent,
   AppSidebarHeaderComponent,
-  AppSidebarMinimizerComponent,
   APP_SIDEBAR_NAV
 } from './components';
 
 const APP_COMPONENTS = [
   AppAsideComponent,
-  
   AppFooterComponent,
   AppHeaderComponent,
   AppSidebarComponent,
   AppSidebarFooterComponent,
-  AppSidebarFormComponent,
   AppSidebarHeaderComponent,
-  AppSidebarMinimizerComponent,
   APP_SIDEBAR_NAV
 ]
 
 // Import directives
 import {
   AsideToggleDirective,
-  NAV_DROPDOWN_DIRECTIVES,
-  ReplaceDirective,
   SIDEBAR_TOGGLE_DIRECTIVES
 } from './directives';
 
 const APP_DIRECTIVES = [
   AsideToggleDirective,
-  NAV_DROPDOWN_DIRECTIVES,
-  ReplaceDirective,
   SIDEBAR_TOGGLE_DIRECTIVES
 ]
 
@@ -65,7 +55,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpModule } from '@angular/http';
-import { EventComponent } from './views/event/event.component';
 import { loginService} from './views/pages/login/login.service';
 import{AutheService } from './views/pages/register/authe.service'
 @NgModule({
@@ -83,7 +72,7 @@ import{AutheService } from './views/pages/register/authe.service'
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES,
-    EventComponent
+    
   ],
   providers: [loginService,AutheService,{
     provide: LocationStrategy,
