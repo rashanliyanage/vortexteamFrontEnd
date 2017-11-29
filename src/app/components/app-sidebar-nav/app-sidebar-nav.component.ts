@@ -60,7 +60,7 @@ export class AppSidebarNavComponent implements OnInit{
    viewButton(){
      this.isClickedButton =true;
    }
-   viewButtn_ad(){
+   viewButtonAdd(){
      this.isClickButtonAd=true;
    }
    uploadProfilePicture(){
@@ -94,6 +94,32 @@ export class AppSidebarNavComponent implements OnInit{
 
   //   });
   
+   }
+
+   uploadAdd(){
+    console.log('in the upload call');
+    const formData: any = new FormData();
+    const files: Array<File> = this.filesToUpload;
+    console.log(files);
+    this.isClickButtonAd=false;
+    for(let i =0; i < files.length; i++){
+        formData.append("uploads[]", files[i], files[i]['name']);
+    }
+    console.log(formData);
+   
+    this.http.post('http://localhost:3000/api/add/uploadAdd', formData).toPromise()
+    .then((response)=>{
+      console.log('here is'+response.json());
+      this.url =response.json() as Url ;
+  
+  
+    }).catch((err)=>{
+  
+        console.log('err');
+  
+    })
+
+
    }
   fileChangeEvent(fileInput: any) {
     
