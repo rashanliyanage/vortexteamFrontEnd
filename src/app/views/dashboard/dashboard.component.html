@@ -1,3 +1,31 @@
+<div class ="coverPotoWrap">
+    <div class ="coverPhoto">
 
-                    
            
+               // <img  src="data:image/PNG;base64,{{img.img}}"class ="img-thumbnail">  
+    </div>
+    <input id="file"  name="file" type="file" (change)="fileChangeEvent($event)" placeholder="" multiple/>
+     <span  class="icon-camera"></span> <label for="file" >upload profile picture</label> 
+    <button type="button" class="btn btn-primary" (click)="uploadCoverPhoto()">
+            <i class="fa fa-star"></i>&nbsp;Upload picture
+        </button>
+</div>
+ <div *ngFor="let img of imageDetailArray">
+<div class="col-sm-6 col-md-5 offset-4 ">
+    <div class="card bodyColor">
+      <div class="card-header">
+        <i class="fa fa-check"></i>
+      </div>
+      <div class="card-body AddPic">
+            
+                    
+            
+         <img  src="data:image/PNG;base64,{{img.img}}" class ="img-thumbnail">
+      </div>
+      <div *ngIf="userType=='service_provider'?true:fasle">
+      <div class="card-footer"><button class="btn btn-danger btn-lg" (click)="deleteImages(img.url,img.id)">Delete</button></div>
+    </div>
+    </div>
+  
+  
+   </div>  

@@ -1,7 +1,8 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
-import {ProfileService} from '../../services/serviceProvider.service'
+import {ProfileService} from '../../services/serviceProvider.service';
+import {SidebarService} from '../../services/sheredServicesidebar.service';
 // Import navigation elements
 class Url{
     success:boolean;
@@ -10,12 +11,20 @@ class Url{
     photodata:string;
     
   }
+  class Add{
+    success:boolean;
+    status:string;
+    id:string;
+    imgArray:string[];
+
+
+  }
 
 @Component({
   selector: 'app-sidebar-nav',
   templateUrl:'./app-sidebar-nav.componet.html',
   styleUrls: ['./app-sidebar-nav.componet.scss'],
-  providers:[ProfileService] 
+  providers:[ProfileService,SidebarService] 
 
 })
 
@@ -33,7 +42,9 @@ export class AppSidebarNavComponent implements OnInit{
     message:"",
     photodata:""
     }
-   constructor(private http:Http,private router:Router,private profileService:ProfileService){}
+   add:Add;
+   constructor(private sidebarService:SidebarService,private http:Http,private router:Router,private profileService:ProfileService){}
+   private headers = new Headers({'Content-Type' : 'application/json'});
    ngOnInit(){
    this.userType = JSON.parse(localStorage.getItem('usertype'));
     console.log('user'+this.userType);
@@ -73,12 +84,11 @@ export class AppSidebarNavComponent implements OnInit{
         formData.append("uploads[]", files[i], files[i]['name']);
     }
     console.log(formData);
-   
-    this.http.post('http://localhost:3000/api/profile/updateProfilePicture', formData).toPromise()
+ this.http.post('http://localhost:3000/api/profile/updateProfilePicture',formData).toPromise()
     .then((response)=>{
-      console.log('here is'+response.json());
+      console.log('here is'+response);
       this.url =response.json() as Url ;
-  
+      console.log(this.url);
   
     }).catch((err)=>{
   
@@ -108,16 +118,16 @@ export class AppSidebarNavComponent implements OnInit{
     console.log(formData);
    
     this.http.post('http://localhost:3000/api/add/uploadAdd', formData).toPromise()
-    .then((response)=>{
-      console.log('here is'+response.json());
-      this.url =response.json() as Url ;
-  
-  
-    }).catch((err)=>{
-  
-        console.log('err');
-  
-    })
+          .then((response)=>{
+            this.add =response.json() as Add ;
+          console.log(this.add);
+        window.location.reload();
+        
+          }).catch((err)=>{
+        
+              console.log('err');
+        
+          })
 
 
    }
