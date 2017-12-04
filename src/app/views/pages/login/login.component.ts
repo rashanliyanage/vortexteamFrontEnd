@@ -40,7 +40,7 @@ user:User ={
       if(data.success){
        this.autheService.storeUserData(data.token,data.user.usertype,data.user);
         localStorage.setItem("user", JSON.stringify(data));
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/profile']);
       }else{
         this.isLoginFailed =true;
       }

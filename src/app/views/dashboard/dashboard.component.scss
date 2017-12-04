@@ -1,10 +1,10 @@
 .inputfile {
     width: 0.1px;
     height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
+   
+    // overflow: hidden;
     position: absolute;
-    z-index: -1;
+ 
 }
 .inputfile + label {
     font-size: 8.00em;
@@ -18,8 +18,15 @@
 .inputfile + label:hover {
     background-color: red;
 }
-.inputfile + label {
-cursor: pointer; /* "hand" cursor */
+
+div.uploadFile:hover{ 
+    width: 200px;
+    background-color: rgb(35, 202, 214);
+}
+.uploadFile label,span{
+  
+    margin-top: 10px;
+    margin-left: 10px;
 }
 .AddPic img{
         height: 450px;
@@ -40,7 +47,7 @@ margin-top: 60px;
 .coverPotoWrap{
 width: 100%;
 height: 500px;
-background-color: yellow;
+background-color:rgb(90, 85, 85)
 
 }
 .coverPhoto img{
@@ -49,6 +56,10 @@ background-color: yellow;
     width: 100%;
   
     background-color: rgb(188, 230, 40);
+
+}
+.adverticementWrap{
+background-color: rgb(41, 38, 38);
 
 }
 

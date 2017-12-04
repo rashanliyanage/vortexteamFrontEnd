@@ -1,15 +1,20 @@
 <div class ="coverPotoWrap">
-    <div class ="coverPhoto">
-
-           
-               // <img  src="data:image/PNG;base64,{{img.img}}"class ="img-thumbnail">  
+    <div class ="coverPhoto"> 
+      <img  src="data:image/PNG;base64,{{coverphoto.img}}"class ="img-thumbnail">    
     </div>
-    <input id="file"  name="file" type="file" (change)="fileChangeEvent($event)" placeholder="" multiple/>
-     <span  class="icon-camera"></span> <label for="file" >upload profile picture</label> 
+    <div *ngIf="userType=='service_provider'?true:fasle">
+    <div class ="uploadFile">
+    <input id="file" class="inputfile" name="file"  (click)="viewCoverButton()" type="file" (change)="fileChangeEvent($event)" placeholder="" multiple/>
+    <span  class="icon-camera"></span> <label for="file" >upload profile picture</label>
+  </div>
+  <div *ngIf ="isClickedCoverButton"class ="buttonUpload">
     <button type="button" class="btn btn-primary" (click)="uploadCoverPhoto()">
-            <i class="fa fa-star"></i>&nbsp;Upload picture
+            <i class="fa fa-star"></i>&nbsp;Update coverphoto
         </button>
+      </div>
+    </div>
 </div>
+<div>
  <div *ngFor="let img of imageDetailArray">
 <div class="col-sm-6 col-md-5 offset-4 ">
     <div class="card bodyColor">
@@ -20,12 +25,13 @@
             
                     
             
-         <img  src="data:image/PNG;base64,{{img.img}}" class ="img-thumbnail">
+         <img  src="data:image/PNG;base64,{{img.img}}" class ="img-thumbnail img-responsive">
       </div>
       <div *ngIf="userType=='service_provider'?true:fasle">
       <div class="card-footer"><button class="btn btn-danger btn-lg" (click)="deleteImages(img.url,img.id)">Delete</button></div>
     </div>
     </div>
   
-  
+  </div>
    </div>  
+   

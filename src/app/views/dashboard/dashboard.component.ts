@@ -15,6 +15,11 @@ class Img{
 
 
 }
+class coverImg{
+img:string;
+id:string;
+
+}
 
 
 @Component({
@@ -28,6 +33,7 @@ export class DashboardComponent implements OnInit {
 constructor(private profileService:ProfileService, private http:Http,private router:Router){
 
 }
+isClickedCoverButton =false;
 count:string;
 userType:string;
 imagesArray=[];
@@ -37,6 +43,11 @@ img ={
   url:'',
   id:''
 
+}
+
+coverphoto:coverImg ={
+  img:'',
+  id:''
 }
 imageDetailArray:Img[]=[];
 
@@ -48,17 +59,18 @@ ngOnInit() {
 }
 this.userType = JSON.parse(localStorage.getItem('usertype'));
 console.log('user'+this.userType);
-console.log('in dash');
+
 this.getAdverticement();
+this.getCoverPhoto();
 }
 deleteImages(url:any,id:any){
-  console.log(id);
+  
   var deleteImg = new Img();
     deleteImg.id =id;
     deleteImg.url =url;
     this.profileService.deleteAdverticement(deleteImg)
     .then(response=>{
-      console.log('delete succesfully');
+
       location.reload();
     }).catch(err=>{
       console.log(err);
@@ -70,16 +82,14 @@ uploadCoverPhoto(){
   console.log('in the upload call');
   const formData: any = new FormData();
   const files: Array<File> = this.filesToUpload;
-  console.log(files);
-  
+  this.isClickedCoverButton =false;
   for(let i =0; i < files.length; i++){
       formData.append("uploads[]", files[i], files[i]['name']);
   }
   console.log(formData);
 this.http.post('http://localhost:3000/api/Add_2/updateCoverPhoto',formData).toPromise()
   .then((response)=>{
-  this.img =response.json() as Img;
-  console.log(this.img);
+  this.coverphoto =response.json() as coverImg;
 
   }).catch((err)=>{
 
@@ -101,12 +111,33 @@ this.http.post('http://localhost:3000/api/Add_2/updateCoverPhoto',formData).toPr
        
          this.imageDetailArray.push(newImg);
       }
-      console.log(this.imageDetailArray);
+    
       
     }).catch(err=>{
 
       console.log('in dash err');
     })
+
+ }
+ viewCoverButton(){
+
+this.isClickedCoverButton =true;
+
+ }
+ getCoverPhoto(){
+
+this.profileService.getCovePoto()
+.then(response=>{
+    this.coverphoto =response;
+
+
+
+}).catch(err=>{
+
+console.log('cover get err');
+
+});
+
 
  }
 

@@ -1,0 +1,84 @@
+<div *ngIf="userType=='service_provider'?true:fasle">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-sm-6 offset-4">
+        <div class="card">
+          <div class="card-header">
+            <strong>About You</strong>
+            <small>Form</small>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text"  [(ngModel)] ="editAbout.name"class="form-control" id="name" placeholder="{{editAbout.name}}">{{editAbout.name}}
+                </div>
+              </div>
+            </div><!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="ccnumber">email</label>
+                  <input type="email"  [(ngModel)] ="editAbout.email" class="form-control" id="ccnumber" placeholder="{{editAbout.email}}">{{editAbout.email}}
+                </div>
+              </div>
+            </div><!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="ccnumber">Phone NUmber</label>
+                  <input type="text" [(ngModel)] ="editAbout.phoneNumber" class="form-control" id="ccnumber" placeholder="{{editAbout.phoneNumber}}">
+                </div>
+              </div>
+            </div><!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="ccnumber">Address</label>
+                  <textarea class="form-control"  [(ngModel)] ="editAbout.address" id="exampleTextarea" rows="3" placeholder="{{editAbout.address}}"></textarea>
+                </div>
+              </div>
+            </div><!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="ccnumber">Qualification</label>
+                  <textarea class="form-control" [(ngModel)] ="editAbout.qualification"  id="exampleTextarea" placeholder="{{editAbout.qualification}}" rows="3"></textarea>
+                </div>
+              </div>
+            </div><!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="ccnumber">Expirence</label>
+                  <textarea class="form-control" [(ngModel)] ="editAbout.expirience"  id="exampleTextarea" placeholder="{{editAbout.expirience}}" rows="3"></textarea>
+                </div>
+              </div>
+            </div><!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="ccnumber">Previous work</label>
+                  <input type="text" class="form-control"  id="ccnumber" placeholder="Previous work">
+                </div>
+              </div>
+            </div><!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="button" class="btn btn-primary" (click)="submitEdit()">
+                  <i class="fa fa-star"></i>&nbsp;Submit Your Edit
+              </button>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div><!--/.col-->
+      
+    </div><!--/.row-->
+    
+</div>
+</div>
+
+

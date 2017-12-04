@@ -40,7 +40,7 @@ isRegistrationFailed: boolean = false;
   ngOnInit(){
 
     if(localStorage.getItem("user")) {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['profile']);
     }
   }
   
