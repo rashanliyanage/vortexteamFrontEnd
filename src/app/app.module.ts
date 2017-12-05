@@ -56,7 +56,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpModule } from '@angular/http';
 import { loginService} from './views/pages/login/login.service';
-import{AutheService } from './views/pages/register/authe.service'
+import{AutheService } from './views/pages/register/authe.service';
+
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -72,6 +74,8 @@ import{AutheService } from './views/pages/register/authe.service'
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES,
+   
+   
     
   ],
   providers: [loginService,AutheService,{

@@ -54,6 +54,10 @@ export class AppSidebarNavComponent implements OnInit{
     }
   
    }
+  //  gotoAbout(){
+
+  //   this.router.navigate(['/about']);
+  //  }
    getUserProfilePicture(){
     this.profileService.getUserProfilepicture()
     .then(response=>{
@@ -107,6 +111,7 @@ export class AppSidebarNavComponent implements OnInit{
    }
 
    uploadAdd(){
+     this.router.navigate(['/profile']);
     console.log('in the upload call');
     const formData: any = new FormData();
     const files: Array<File> = this.filesToUpload;

@@ -109,7 +109,7 @@
 
               <div class="input-group mb-3">
                   <span class="input-group-addon"><i class="icon-user"></i></span>
-                  <input type="text" [(ngModel)]="registeruser.username" class="form-control" #username="ngModel" placeholder="lastname" required>
+                  <input type="text" [(ngModel)]="registeruser.username" class="form-control" #username="ngModel" placeholder="user name" required>
                 </div>
   
                 <div *ngIf="username.invalid && (username.dirty || username.touched)"

@@ -19,6 +19,21 @@ class Url{
     imgLinkArray:string[];
 
   }
+  class coverImg{
+    img:string;
+    id:string;
+    
+    }
+    class EditAbout{
+        
+        name:string;
+        email:string;
+        phoneNumber:string;
+        address:string;
+        qualification:string;
+        expirience:string;
+        
+        }
 @Injectable()
 
 
@@ -27,9 +42,11 @@ export class ProfileService{
     private webApi_upload_profile_pic = 'http://localhost:3000/api/profile/updateProfilePicture';
     private webApi_authenticate = 'http://localhost:3000/api/authenticate';
     private webApi_getAllAdd = 'http://localhost:3000/api/add/getAdd';
-
+    private webApi_getCoverPhotp ='http://localhost:3000/api/Add_2/getCoverphoto';
+   private webApi_submitEditAbout ='http://localhost:3000/api/Add_2/submitAbout';
+   private webApi_getAbout ='http://localhost:3000/api/Add_2/getEditAbout';
     private headers = new Headers({'Content-Type' : 'application/json'});
-    
+
     constructor(private http: Http,private router: Router) { }
 
 uploadProfilePicture(formdata:any):Promise<Url>{
@@ -44,6 +61,22 @@ uploadProfilePicture(formdata:any):Promise<Url>{
         return err;
     });
 }
+getCovePoto():Promise<coverImg>{
+
+    console.log();
+    return this.http.get(this.webApi_getCoverPhotp, {headers: this.headers})
+    .toPromise()
+    .then(response=>{
+     return response.json() as coverImg;
+ 
+     }).catch(err=>{
+         console.log('service '+err);
+         return err;
+     });
+
+}
+
+
 
 getUserProfilepicture():Promise<Url>{
     console.log();
@@ -59,7 +92,6 @@ getUserProfilepicture():Promise<Url>{
 }
 
 getAllAdd():Promise<Add>{
-
 return this.http.get( this.webApi_getAllAdd, {headers: this.headers})
 .toPromise().then(response=>{
 return response.json() as Add;
@@ -88,5 +120,32 @@ console.log('err delete in service');
 
 }
 
+
+submitEditAbout(about:EditAbout):Promise<EditAbout>{
+
+ return this.http.post(this.webApi_submitEditAbout,about,{headers: this.headers})
+                .toPromise()
+                .then(response=>{
+                return response.json() as EditAbout;
+
+            }).catch(err=>{
+                console.log('in err service about');
+                return err;
+            });
+
+}
+getEditget():Promise<EditAbout>{
+    
+     return this.http.get(this.webApi_getAbout,{headers: this.headers})
+                    .toPromise()
+                    .then(response=>{
+                    return response.json() as EditAbout;
+    
+                }).catch(err=>{
+                    console.log('in err service get about');
+                    return err;
+                });
+    
+    }
 
 }
