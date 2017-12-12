@@ -34,6 +34,13 @@ class Url{
         expirience:string;
         
         }
+        class Event{
+            
+              EventTheamArray:string[];
+              eventNameArray:string[];
+              eventDiscriptionArray:string[];
+            
+            }
 @Injectable()
 
 
@@ -146,6 +153,22 @@ getEditget():Promise<EditAbout>{
                     return err;
                 });
     
+    }
+
+uploadEventData(event:any):Promise<Event>{
+
+return this.http.post('http://localhost:3000/api/Add_2/uploadEventData',event,{headers: this.headers})
+.toPromise()
+.then(response=>{
+return response.json() as Event;
+
+
+}).catch(err=>{
+
+console.log(err);
+return err;
+});
+
     }
 
 }
