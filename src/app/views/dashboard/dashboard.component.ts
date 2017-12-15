@@ -36,6 +36,7 @@ constructor(private profileService:ProfileService, private http:Http,private rou
 isClickedCoverButton =false;
 count:string;
 userType:string;
+User:boolean;
 imagesArray=[];
 imageLinkArray =[];
 img ={
@@ -59,6 +60,14 @@ ngOnInit() {
 }
 this.userType = JSON.parse(localStorage.getItem('usertype'));
 console.log('user'+this.userType);
+if(this.userType =='service_provider' || this.userType == 'organizer'){
+  this.User =true;
+  console.log('user in  '+this.userType);
+
+}else{
+  this.User =false;
+
+}
 
 this.getAdverticement();
 this.getCoverPhoto();

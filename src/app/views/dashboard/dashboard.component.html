@@ -2,7 +2,7 @@
     <div class ="coverPhoto"> 
       <img  src="data:image/PNG;base64,{{coverphoto.img}}"class ="img-thumbnail">    
     </div>
-    <div *ngIf="userType=='service_provider'?true:fasle">
+    <div *ngIf="User">
     <div class ="uploadFile">
     <input id="file" class="inputfile" name="file"  (click)="viewCoverButton()" type="file" (change)="fileChangeEvent($event)" placeholder="" multiple/>
     <span  class="icon-camera"></span> <label for="file" >upload profile picture</label>

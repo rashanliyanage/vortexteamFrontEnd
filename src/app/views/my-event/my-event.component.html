@@ -48,3 +48,44 @@
     </div>
 </div>
 </div>
+
+<!-- <div class=" event">
+  <div *ngFor = "let event of eventDetailArray">
+    <div class  ="eventWrapper" >
+  <div style="display:inline-block;" class=" eventImg">
+      <img  src="data:image/PNG;base64,{{event.eventtheam}}" class ="img-thumbnail img-responsive eventImg">
+  </div>
+  <div style="display:inline-block;" class=" eventbody ">
+    {{event.eventname}}
+   {{event.eventdiscription}}
+  </div>
+</div>
+  <br>
+  <br>
+</div>
+
+</div> -->
+<div class="span12">
+    
+            <!-- Changed from `hidden` to `auto`. -->
+            <div style="overflow:auto;width:100%;">
+    
+                <!-- This is the div that does the trick: -->
+                <div *ngFor = "let event of eventDetailArray">
+                <div style="" class= "eventWrapper">
+                  
+                    
+                        
+                <div style="display:inline-block;" class=" eventImg">
+                    <img  src="data:image/PNG;base64,{{event.eventtheam}}" class ="img-thumbnail img-responsive eventImg">
+                </div>
+                <div style="display:inline-block;" class=" eventbody ">
+                  <div class="eventname"><h3>{{event.eventname}}</h3></div>  
+                   <div class="eventDiscriptions"><p>{{event.eventdiscription}}</p></div> 
+                </div>
+              </div>
+                    </div>
+    
+                </div>
+    
+         
