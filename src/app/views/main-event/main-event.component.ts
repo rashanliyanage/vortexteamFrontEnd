@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {EventService} from '../../services/event.service';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { Router } from '@angular/router';
+
 class EventType {
   
   eventTypeId:string;

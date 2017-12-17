@@ -171,4 +171,22 @@ return err;
 
     }
 
+    getEvent(){
+
+        return this.http.get('http://localhost:3000/api/Add_2/getEvent',{headers: this.headers})
+        .toPromise()
+        .then(response=>{
+            return response.json() as Event;
+
+        }).catch(err=>{
+            
+            console.log(err);
+            return err;
+            });
+
+    }
+
+
+
+
 }

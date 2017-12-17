@@ -1,7 +1,12 @@
 
 <app-header></app-header>
 <div class="app-body">
+    <div *ngIf="userType=='service_provider'?true:fasle">
   <app-sidebar></app-sidebar>
+    </div>
+    <div *ngIf="userType=='organizer'?true:fasle">
+      <app-sidebar-organizer></app-sidebar-organizer>
+    </div>
   <!-- Main content -->
   <main class="main">
     <!-- Breadcrumb -->

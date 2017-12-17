@@ -23,6 +23,8 @@ import {
   AppSidebarComponent,
   AppSidebarFooterComponent,
   AppSidebarHeaderComponent,
+  AppSidebarOrganizerComponent,
+  AppSidebarNaveOrganizerComponent,
   APP_SIDEBAR_NAV
 } from './components';
 
@@ -33,6 +35,8 @@ const APP_COMPONENTS = [
   AppSidebarComponent,
   AppSidebarFooterComponent,
   AppSidebarHeaderComponent,
+  AppSidebarOrganizerComponent,
+  AppSidebarNaveOrganizerComponent,
   APP_SIDEBAR_NAV
 ]
 
@@ -59,6 +63,11 @@ import { loginService} from './views/pages/login/login.service';
 import{AutheService } from './views/pages/register/authe.service';
 
 
+
+//import { AppSidebarNaveOrganizerComponent } from './components/app-sidebar-nave-organizer/app-sidebar-nave-organizer.component';
+// import { AppSidebarOrganizerComponent } from './components/app-sidebar-organizer/app-sidebar-organizer.component';
+
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -74,6 +83,11 @@ import{AutheService } from './views/pages/register/authe.service';
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES,
+    
+   
+ 
+    
+   
    
    
     

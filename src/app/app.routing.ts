@@ -32,6 +32,18 @@ export const routes: Routes = [
         path: 'myevent',
         loadChildren: './views/my-event/my-event.module#MyEventModule'
       },
+       {
+        path: 'mainevent',
+        loadChildren: './views/main-event/main-event.module#MainEventModule'
+      },
+      {
+        path: 'eventbody',
+        loadChildren: './views/event-body/event-body.module#EventBodyModule'
+      },
+      {
+        path: 'eventlogin',
+        loadChildren: './views/eventlogin/eventlogin.module#EventloginModule'
+      },
     ]
   },
   {

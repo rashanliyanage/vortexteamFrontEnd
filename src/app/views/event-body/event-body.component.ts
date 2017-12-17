@@ -8,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class EventBodyComponent implements OnInit {
 
   constructor() { }
+  eventname:string;
 
   ngOnInit() {
+    this.eventname = JSON.parse(localStorage.getItem('eventname'));
   }
 
 }

@@ -12,6 +12,7 @@ export class FullLayoutComponent implements OnInit {
     private router: Router,
     private loginservice:loginService,private autheService:AutheService  ) { }
   isUserType:string;
+  userType:string;
   ngOnInit() {
     if(!localStorage.getItem("user")) {
       
@@ -19,9 +20,9 @@ export class FullLayoutComponent implements OnInit {
       
     }
  
-    this.isUserType=   this.autheService.getUsertype();
+    this.userType = JSON.parse(localStorage.getItem('usertype'));
+    console.log('user'+this.userType);
     
-        console.log('usertype is'+this.isUserType);
     
   }
 }
