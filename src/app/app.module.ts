@@ -62,6 +62,7 @@ import { HttpModule } from '@angular/http';
 import { loginService} from './views/pages/login/login.service';
 import{AutheService } from './views/pages/register/authe.service';
 
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
 
 //import { AppSidebarNaveOrganizerComponent } from './components/app-sidebar-nave-organizer/app-sidebar-nave-organizer.component';
@@ -74,6 +75,7 @@ import{AutheService } from './views/pages/register/authe.service';
     AppRoutingModule,
     FormsModule,
     HttpModule,
+    Ng2FilterPipeModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule
@@ -83,6 +85,7 @@ import{AutheService } from './views/pages/register/authe.service';
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES,
+
     
    
  

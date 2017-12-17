@@ -5,6 +5,7 @@ import { EventBodyComponent } from './event-body.component';
 import {EventBodyRoutingModule } from './event-body.routing.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FilterPipe } from '../filter.pipe';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { CommonModule } from '@angular/common';
     ChartsModule,
     BsDropdownModule.forRoot(),FormsModule,CommonModule
   ],
-  declarations: [ EventBodyComponent ]
+  declarations: [ EventBodyComponent,FilterPipe ]
 })
 export class EventBodyModule { }
