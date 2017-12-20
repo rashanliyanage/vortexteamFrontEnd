@@ -19,6 +19,7 @@ export class EventloginComponent implements OnInit {
   constructor( private eventService:EventService,private router:Router) { }
 
   ngOnInit() {
+    console.log('in log');
   }
   event:Event ={
 

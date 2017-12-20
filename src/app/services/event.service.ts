@@ -21,7 +21,7 @@ export class EventService{
     private web_Api_register = 'http://localhost:3000/api/event/registerEvent';
     private web_Api_login = 'http://localhost:3000/api/event/login';
     private web_Api_getorganizers = 'http://localhost:3000/api/event/getorganizers';
-
+    private web_Api_addgetorganizers = 'http://localhost:3000/api/event/addorganizers';
     registerEvent(registerevent){
 
         return this.http.post(this.web_Api_register,registerevent,{headers: this.headers})
@@ -79,6 +79,22 @@ return err;
 
 
     }
+
+    addSelectedOrganizer(selectedorganizer){
+        console.log('in the add serviec');
+        console.log(selectedorganizer);
+
+                return this.http.post(this.web_Api_addgetorganizers,selectedorganizer,{headers: this.headers})
+                .toPromise()
+                .then(response=>{
+                return response.json();
+
+                }).catch(err=>{
+
+                return err;
+
+                });
+                    }
 
 
 }

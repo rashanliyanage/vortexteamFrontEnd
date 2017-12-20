@@ -1,5 +1,5 @@
 <div class ="event">
-  <h1 style="text-align:center;">WEl COME To {{eventname |  uppercase}}</h1> 
+  <h1 style="text-align:center;">WEl COME TO {{eventname |  uppercase}}</h1> 
 
 </div>
 
@@ -12,12 +12,14 @@
     <div class="card-body">
       <div class="form-group">
         <label for="company"><strong>SEARCH</strong></label>
-        <input type="text" [(ngModel)]="organizername" class="form-control" id="company" (keyup)="valuechange($event)"placeholder="event name">
-        
-        
+        <input type="text" [(ngModel)]="organizername" class="form-control" id="company" (keyup)="valuechange($event)"placeholder="{{organizername}}">
+        <span class ="buttonStyle"><button type="button" class="btn btn-primary " (click)="addOrganizer()">
+        <i class="fa fa-star"></i>&nbsp;Upload
+      </button>
+    </span>
           <div *ngFor ="let mem of OrganizerDtail | filter:organizername">
          <div *ngIf ="showmembers">
-           <div class ="wrapp">
+           <div class ="wrapp" (click)="selectorgaizer(mem.id,mem.name)">
           <div class="d-inline-block ">
              
             <div class ="profilepic">
@@ -34,6 +36,10 @@
             
           </div>
       </div>
+      <div class="alert alert-primary " *ngIf="isadd">success full add &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
+        <i class="fa fa-window-close" aria-hidden="true" (click)="closeAleart()"></i></div>
+
       </div>
 
      

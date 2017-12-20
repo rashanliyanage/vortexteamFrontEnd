@@ -22,6 +22,11 @@ export class EventBodyComponent implements OnInit {
   eventname:string;
   showmembers:boolean =false;
   organizername:''
+  isadd:boolean = false;
+  sendAddId ={
+
+    selectedorganizerId:'' 
+  }
   constructor(private eventservice: EventService,private router:Router) { 
   
   
@@ -33,13 +38,38 @@ export class EventBodyComponent implements OnInit {
   
   
   }
-  organizerArray = [
-    {name:'rashan',id:'1'},
-    {name:'nipun',id:'2'},
-    {name:'kasun',id:'3'},
-    {name:'akila',id:'4'}
+  closeAleart(){
 
-  ]
+    this.isadd =false;
+  }
+  addOrganizer(){
+console.log('in add');
+this.eventservice.addSelectedOrganizer(this.sendAddId)
+.then(response=>{
+console.log(response);
+if(response.success==true){
+  this.isadd =true;
+}else{
+this.isadd =false;
+
+}
+
+
+}).catch(err=>{
+
+console.log(err);
+
+});
+
+  }
+  selectorgaizer(id,name){
+this.organizername = name;
+
+this.sendAddId.selectedorganizerId =id;
+
+this.showmembers =false;
+
+  }
   valuechange($event){
 var legth = this.organizername.length;
 if(legth >=1){
@@ -74,5 +104,8 @@ console.log(this.OrganizerDtail);
 
     });
   }
+
+
+
 
 }

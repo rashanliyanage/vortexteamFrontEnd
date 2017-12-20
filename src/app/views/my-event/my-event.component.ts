@@ -32,6 +32,7 @@ export class MyEventComponent implements OnInit {
   }
   filesToUpload: Array<File> = [];
   eventDetailArray:EventDetail[]=[];
+ 
   formdata:boolean =false;
   event={
 
