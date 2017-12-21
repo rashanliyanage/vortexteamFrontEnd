@@ -47,7 +47,7 @@ return res.json();
     console.log(user);
     localStorage.setItem('id_token',token);
     localStorage.setItem('usertype',JSON.stringify(usertype));
-    localStorage.setItem('user',JSON.stringify(user));
+    localStorage.setItem('user',JSON.stringify(user.id));
     this.usertype =usertype;
     this.token =token;
     this.registeredUser =user;

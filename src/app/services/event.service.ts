@@ -4,10 +4,18 @@ import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import 'rxjs/add/operator/map';
 import { promise } from 'selenium-webdriver';
+import { Promise } from 'q';
 class Organizer{
 
     allOrganizerArray:string[];
     success:boolean;
+
+}
+class notificationArrays{
+    notificationMyArray:string[];
+    success:boolean;
+    
+
 
 }
 
@@ -18,6 +26,7 @@ export class EventService{
 
     constructor(private http: Http,private router: Router) { }
     private headers = new Headers({'Content-Type' : 'application/json'});
+    private web_Api_getNotification ='http://localhost:3000/api/event/getnotification'
     private web_Api_register = 'http://localhost:3000/api/event/registerEvent';
     private web_Api_login = 'http://localhost:3000/api/event/login';
     private web_Api_getorganizers = 'http://localhost:3000/api/event/getorganizers';
@@ -77,6 +86,26 @@ console.log(err);
 return err;
 });
 
+
+    }
+
+
+    getNotification(useridobj){
+        console.log(useridobj)
+
+
+return this.http.post(this.web_Api_getNotification,useridobj)
+    .toPromise()
+        .then(response=>{
+  
+        return response.json() as notificationArrays;
+
+
+}).catch(err=>{
+console.log('err ger notification');
+console.log(err);
+return err;
+});
 
     }
 

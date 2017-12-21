@@ -37,6 +37,7 @@ console.log();
 if(response.success){
 this.eventname = response.eventname;
 localStorage.setItem('eventname',JSON.stringify(this.eventname));
+localStorage.setItem('eventid',JSON.stringify(response.eventid));
 console.log(this.eventname);
 console.log('loging succesfully');
 this.router.navigate(['/eventbody']);

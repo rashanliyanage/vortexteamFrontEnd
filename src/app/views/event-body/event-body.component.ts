@@ -24,8 +24,9 @@ export class EventBodyComponent implements OnInit {
   organizername:''
   isadd:boolean = false;
   sendAddId ={
-
-    selectedorganizerId:'' 
+    eventId:'',
+    selectedorganizerId:'',
+    addeduser:'' 
   }
   constructor(private eventservice: EventService,private router:Router) { 
   
@@ -34,7 +35,11 @@ export class EventBodyComponent implements OnInit {
   
   ngOnInit() {
     this.  getAllOrganizer();
-    this.eventname = JSON.parse(localStorage.getItem('eventname'));
+   this.eventname = JSON.parse(localStorage.getItem('eventname'));
+    this.sendAddId.eventId = JSON.parse(localStorage.getItem('eventid'));
+    this.sendAddId.addeduser =JSON.parse(localStorage.getItem('user'));
+   
+    console.log('hear'+this.sendAddId.addeduser);
   
   
   }
@@ -90,6 +95,7 @@ this.showmembers =false;
     .then(response=>{
       console.log(response);
       // this.OrganizerDtail.push(response.allOrganizerArray);
+      
       for(var i =0;i<response.allOrganizerArray.length;i++){
         var organizer = new Organizers();
        this. OrganizerDtail.push(response.allOrganizerArray[i]); 
