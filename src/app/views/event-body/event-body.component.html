@@ -47,4 +47,15 @@
 
  
 </div><!--/.col-->
+  <div >
+     
+
+      <agm-map [latitude]="coordinats.lat" [longitude]="coordinats.lng" (mapClick)="mapClick($event)">
+          <agm-marker [latitude]="coordinats.lat" [longitude]="coordinats.lng"></agm-marker>
+      </agm-map>
+      
+    </div>
+
+
+
 

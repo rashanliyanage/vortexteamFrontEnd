@@ -6,12 +6,16 @@ import {EventBodyRoutingModule } from './event-body.routing.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../filter.pipe';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
     EventBodyRoutingModule,
     ChartsModule,
-    BsDropdownModule.forRoot(),FormsModule,CommonModule
+    BsDropdownModule.forRoot(),FormsModule,CommonModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBCKHYty_-iUFsBbsGL_TJPiO-y8o_VHc4'
+    })
   ],
   declarations: [ EventBodyComponent,FilterPipe ]
 })

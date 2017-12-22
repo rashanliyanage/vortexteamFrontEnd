@@ -58,7 +58,7 @@ this.authToken =null;
 this.usertype =null;
 this.user =null;
 localStorage.clear();
-window.location.reload();
+
 this.router.navigate(['/pages/login']);
 
 

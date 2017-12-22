@@ -28,20 +28,88 @@ export class EventBodyComponent implements OnInit {
     selectedorganizerId:'',
     addeduser:'' 
   }
+
+ coordinats ={
+lat:6.9271,
+lng:79.8612,
+eventId:''
+
+ }
+ getEventLocation_for_id ={
+  eventId:''
+
+ }
+
+
+
+
+
+  
+
+
+  
   constructor(private eventservice: EventService,private router:Router) { 
   
   
     }
   
   ngOnInit() {
-    this.  getAllOrganizer();
+   
    this.eventname = JSON.parse(localStorage.getItem('eventname'));
     this.sendAddId.eventId = JSON.parse(localStorage.getItem('eventid'));
+    this.coordinats.eventId =  JSON.parse(localStorage.getItem('eventid'));
+    this.getEventLocation_for_id.eventId=  JSON.parse(localStorage.getItem('eventid'));
     this.sendAddId.addeduser =JSON.parse(localStorage.getItem('user'));
+    this.getEventLocation();
+    this.getAllOrganizer();
+
    
     console.log('hear'+this.sendAddId.addeduser);
   
   
+  }
+
+
+  getEventLocation(){
+console.log('get event location');
+// console.log(this.eventId);
+this.eventservice.getCoordinate( this.getEventLocation_for_id)
+.then(response=>{
+  this.coordinats.lat =response.lat;
+  this.coordinats.lng = response.lng;
+console.log(response);
+
+
+}).catch(err=>{
+
+console.log(err);
+
+});
+  }
+  
+  saveEventlocation(){
+    console.log('save location');
+
+    this.eventservice.saveEventLocation(this.coordinats)
+    .then(response=>{
+      this.coordinats.lat =response.lat;
+      this.coordinats.lng = response.lng;
+
+
+    }).catch(err=>{
+console.log('err');
+
+    });
+
+
+
+  }
+
+  mapClick(event){
+this.coordinats.lat =event.coords.lat;
+this.coordinats.lng =event.coords.lng;
+this.saveEventlocation();
+    console.log(event);
   }
   closeAleart(){
 
@@ -112,6 +180,16 @@ console.log(this.OrganizerDtail);
   }
 
 
+
+
+}
+
+interface marker {
+
+name:string;
+lat:number;
+lng:number;
+draggable:boolean;
 
 
 }

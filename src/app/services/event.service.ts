@@ -28,6 +28,8 @@ export class EventService{
     private headers = new Headers({'Content-Type' : 'application/json'});
     private web_Api_getNotification ='http://localhost:3000/api/event/getnotification'
     private web_Api_register = 'http://localhost:3000/api/event/registerEvent';
+    private web_Api_saveEventLocation = 'http://localhost:3000/api/event/setCoordinats';
+    private web_Api_geteventLocation = 'http://localhost:3000/api/event/getCoordinats';
     private web_Api_login = 'http://localhost:3000/api/event/login';
     private web_Api_getorganizers = 'http://localhost:3000/api/event/getorganizers';
     private web_Api_addgetorganizers = 'http://localhost:3000/api/event/addorganizers';
@@ -66,6 +68,45 @@ return err;
 });
 
 
+
+    }
+
+    getCoordinate(id){
+        console.log('get evetn location sevice');
+        
+    console.log('in servic'+id);
+            return this.http.post(this.web_Api_geteventLocation,id)
+            .toPromise()
+            .then(res=>{
+                console.log(res);
+
+                return res.json()
+
+            })
+            .catch(err=>{
+
+                return err;
+
+            });
+
+
+
+    }
+    saveEventLocation(coords){
+        console.log(coords);
+
+    return    this.http.post(this.web_Api_saveEventLocation,coords)
+       .toPromise()
+       .then(response=>{
+
+            return response.json() ;
+
+       }).catch(err=>{
+
+            return err;
+
+       });
+       ; 
 
     }
 

@@ -19,8 +19,11 @@ export class AppAsideComponent implements OnInit{
 
 
   }
+ 
 
   getNotifications:getNotificationObject[] =[];
+
+  
 
   
   notificationArryObject:string[] =[];
@@ -32,9 +35,10 @@ export class AppAsideComponent implements OnInit{
     
     console.log('in aside');
     console.log('here aside'+this.notificationIdObj.userid);
-   // this.getNotification();
+    this.getNotification();
   }
   
+  countNOtificarion =0;
 
 
   getNotification(){
@@ -49,6 +53,7 @@ export class AppAsideComponent implements OnInit{
 
       }
       console.log(this. getNotifications);
+     this. countNOtificarion =this.getNotifications.length;
 
 
     }).catch(err=>{
