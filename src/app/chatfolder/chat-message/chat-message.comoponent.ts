@@ -4,7 +4,8 @@ import { AuthService } from '../chatservice/auth.service';
 import { ChatMessage } from '../chatmodel/chat.model';
 @Component({
   selector: 'app-chat-message',
-  templateUrl: './chat-message.component.html'
+  templateUrl: './chat-message.component.html',
+  styleUrls: ['./chat-message.component.scss'],
 })
 export class ChatMessageComponent { 
 

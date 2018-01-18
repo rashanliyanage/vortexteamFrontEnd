@@ -18,46 +18,46 @@ export class ChatService {
       private db: AngularFireDatabase,
       private afAuth: AngularFireAuth
       ) {
-        //   this.afAuth.authState.subscribe(auth => {
-        //     if (auth !== undefined && auth !== null) {
-        //       this.user = auth;
-        //     }
+          this.afAuth.authState.subscribe(auth => {
+            if (auth !== undefined && auth !== null) {
+              this.user = auth;
+            }
   
-        //     this.getUser().subscribe(a => {
-        //       this.userName = a.displayName;
-        //     });
-        //   });
+            this.getUser().subscribe(a => {
+              this.userName = a.displayName;
+            });
+          });
       }
   
-    // getUser() {
-    //   const userId = this.user.uid;
-    //   const path = `/users/${userId}`;
-    //   return this.db.object(path);
-    // }
+    getUser() {
+      const userId = this.user.uid;
+      const path = `/users/${userId}`;
+      return this.db.object(path);
+    }
   
-    // getUsers() {
-    //   const path = '/users';
-    //   return this.db.list(path);
-    // }
+    getUsers() {
+      const path = '/users';
+      return this.db.list(path);
+    }
   
     sendMessage(msg: string) {
       const timestamp = this.getTimeStamp();
-     // const email = this.user.email;
+      const email = this.user.email;
      console.log('succes fully before');
-     const email = "rashan@gamil.com";
+    // const email = "rashan@gamil.com";
       this.chatMessages = this.getMessages();
       this.chatMessages.push({
         message: msg,
         timeSent: timestamp,
-        //userName: this.userName,
-        userName:"rashan",
+        userName: this.userName,
+        //userName:"rashan",
         email: email });
         console.log('succes fully');
     }
   
     getMessages(): FirebaseListObservable<ChatMessage[]> {
       // query to create our message feed binding
-      return this.db.list('messages', {
+      return this.db.list('group1', {
         query: {
           limitToLast: 25,
           orderByKey: true

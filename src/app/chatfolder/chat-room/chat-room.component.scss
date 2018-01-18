@@ -1,3 +1,5 @@
+
+
 .mainContent{
     display: flex;
 }
@@ -20,8 +22,8 @@ height: 630px;
 .feedWrapper {
     background-color: #fff;
     background: 
-        linear-gradient(181deg, rgba(100,200,255,0.6), rgba(0, 0, 0, 0.9));
-        //  url('../../../assets/img/rashan.jpg') center center no-repeat;
+     linear-gradient(181deg, rgba(100, 232, 255, 0.6), rgba(0, 0, 0, 0.9));
+    //  url('/assets/img/rashan.jpg') center center no-repeat;
     font-family: "Open Sans", sans-serif;
     font-size: 1.2em;
     flex: 5;
@@ -45,4 +47,38 @@ height: 630px;
 
 app-user-list {
     width: 100%;
+}
+
+
+
+
+
+body {
+    width: 100%;
+    min-height:100%;
+    background: #eee;
+    background-attachment: fixed;
+    background-size: cover; 
+    font-family: "Open Sans", sans-serif;
+}
+
+app-chatroom {
+    display: flex;
+    flex-direction: column;
+}
+
+app-navbar{
+    width: 100%;
+}
+
+app-chat-form{
+    width: 100%;
+    display: flex;
+    white-space: nowrap;
+    overflow: none;
+}
+
+.message {
+  display: block;
+  height: auto;
 }

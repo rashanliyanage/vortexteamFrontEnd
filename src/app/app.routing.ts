@@ -70,6 +70,10 @@ export const routes: Routes = [
       {
         path: 'chatroom',
         loadChildren: './chatfolder/chat-room/chat-room.module#ChatRoomModule',
+      },
+      {
+        path: 'chatSignup',
+        loadChildren: './chatfolder/chat-signup-form/signup-form.module#SignUpModule',
       }
     ]
   }
