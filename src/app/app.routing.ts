@@ -74,6 +74,10 @@ export const routes: Routes = [
       {
         path: 'chatSignup',
         loadChildren: './chatfolder/chat-signup-form/signup-form.module#SignUpModule',
+      },
+      {
+        path: 'chatlogin',
+        loadChildren: './chatfolder/chat-login-form/chat-login.module#LoginModule',
       }
     ]
   }

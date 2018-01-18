@@ -32,7 +32,7 @@ export class  AuthService {
           .then((user) => {
             this.authState = user;
             this.setUserStatus('online');
-            this.router.navigate(['chat']);
+            this.router.navigate(['/chat/chatroom']);
           });
       }
   

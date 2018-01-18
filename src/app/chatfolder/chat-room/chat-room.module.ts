@@ -11,6 +11,7 @@ import {ChatFeedComponent}from '../chat-feed/chat-feed.comoponent';
 import {ChatFormComponent}from '../chat-form/chat-form.comoponent';
 import {ChatMessageComponent}from '../chat-message/chat-message.comoponent';
 import { AngularFireModule } from 'angularfire2';
+import {UserItem} from '../user-item/user-item.component'
 @NgModule({
   imports: [
     ChatRoomRoutingModule,
@@ -23,7 +24,8 @@ import { AngularFireModule } from 'angularfire2';
     ChatUserListComponent,
     ChatFeedComponent,
     ChatFormComponent,
-    ChatMessageComponent
+    ChatMessageComponent,
+    UserItem
   ]
 })
 export class ChatRoomModule{ }
