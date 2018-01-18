@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import {
   FullLayoutComponent,
-  SimpleLayoutComponent
+  SimpleLayoutComponent,
+  ChatLayoutComponent
 } from './containers';
 
 export const routes: Routes = [
@@ -56,6 +57,19 @@ export const routes: Routes = [
       {
         path: '',
         loadChildren: './views/pages/pages.module#PagesModule',
+      }
+    ]
+  },
+  {
+    path: 'chat',
+    component:   ChatLayoutComponent,
+    data: {
+      title: 'chat'
+    },
+    children: [
+      {
+        path: 'chatroom',
+        loadChildren: './chatfolder/chat-room/chat-room.module#ChatRoomModule',
       }
     ]
   }

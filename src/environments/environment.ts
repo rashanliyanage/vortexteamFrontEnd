@@ -4,5 +4,13 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: true,
+  firebase: {
+    apiKey: "AIzaSyD0a4zC9sfXTQnBMkJegJ1wMJ_LL822QOw",
+    authDomain: "vortexchat-566a6.firebaseapp.com",
+    databaseURL: "https://vortexchat-566a6.firebaseio.com",
+    projectId: "vortexchat-566a6",
+    storageBucket: "vortexchat-566a6.appspot.com",
+    messagingSenderId: "119566736594"
+  }
 };

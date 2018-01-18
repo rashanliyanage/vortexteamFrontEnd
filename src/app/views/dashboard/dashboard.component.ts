@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { loginService } from '../pages/login/login.service';
-import { FileUploader } from 'ng2-file-upload';
+
 import { ProfileService } from '../../services/serviceProvider.service';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
