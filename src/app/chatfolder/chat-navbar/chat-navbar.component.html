@@ -6,7 +6,7 @@
       <a *ngIf="!(user|async)?.uid" href="#" (click)="login()">Login</a>
     </span>
     <span>
-      <a *ngIf="!(user|async)?.uid" routerLink="/signup">Sign Up</a>
+      <a *ngIf="!(user|async)?.uid" routerLink="/chat/chatSignup">Sign Up</a>
     </span>
     <span>
       <span id="userEmail" *ngIf="(user|async)?.uid">Hello, {{userEmail}}</span>

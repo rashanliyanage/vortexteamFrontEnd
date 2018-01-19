@@ -8,14 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./chat-login-form.component.scss'],
   providers:[AuthService]
 })
-export class ChatLoginFormComponent { 
-
-
+export class ChatLoginFormComponent  implements OnInit{ 
+  constructor(private authService: AuthService, private router: Router) { }
+  ngOnInit() {
+    if(localStorage.getItem("firebase:authUser:AIzaSyD0a4zC9sfXTQnBMkJegJ1wMJ_LL822QOw:[DEFAULT]")) {
+      
+      this.router.navigate(['/chat/chatroom']);
+      
+    }
+  }
   email: string;
   password: string;
   errorMsg: string;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  
 
   login() {
     console.log('login() called from login-form component');

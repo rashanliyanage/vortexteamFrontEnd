@@ -38,7 +38,7 @@ export class  AuthService {
   
       logout() {
         this.afAuth.auth.signOut();
-        this.router.navigate(['login']);
+        this.router.navigate(['/eventbody']);
       }
   
       signUp(email: string, password: string, displayName: string) {
