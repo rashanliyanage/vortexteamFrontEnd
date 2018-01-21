@@ -5,13 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 import {
   FullLayoutComponent,
   SimpleLayoutComponent,
-  ChatLayoutComponent
+  ChatLayoutComponent,
+  FrountLayoutComponent
 } from './containers';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'profile',
+    redirectTo: '/pages/login',
     pathMatch: 'full',
   },
   {
@@ -24,6 +25,10 @@ export const routes: Routes = [
       {
         path: 'profile',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+      },
+      {
+        path: 'broadcast',
+        loadChildren: './views/broadcast/broadcast.module#BroadCastModule'
       },
       {
         path: 'about',
@@ -80,7 +85,8 @@ export const routes: Routes = [
         loadChildren: './chatfolder/chat-login-form/chat-login.module#LoginModule',
       }
     ]
-  }
+  },
+
 ];
 
 @NgModule({

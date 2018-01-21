@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../chatservice/auth.service'
 import { Observable } from 'rxjs/Observable';
+import {Router} from '@angular/router'
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -15,7 +16,7 @@ export class ChatNavbarComponent {
   user: Observable<firebase.User>;
   userEmail: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router :Router) { }
 
   ngOnInit() {
     this.user = this.authService.authUser();
@@ -25,7 +26,11 @@ export class ChatNavbarComponent {
       }
     });
   }
+  goEvent(){
 
+this.router.navigate(['/eventbody']);
+
+  }
   logout() {
     this.authService.logout();
   }

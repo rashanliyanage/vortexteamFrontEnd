@@ -36,6 +36,10 @@ export class AppSidebarNavComponent implements OnInit{
    status:string;
    message:string;
    photodata:string;
+   userId={
+    userId:''
+
+   }
    url:Url = {
     success:false,
     status: "",
@@ -43,11 +47,14 @@ export class AppSidebarNavComponent implements OnInit{
     photodata:""
     }
    add:Add;
+  
    constructor(private sidebarService:SidebarService,private http:Http,private router:Router,private profileService:ProfileService){}
    private headers = new Headers({'Content-Type' : 'application/json'});
    ngOnInit(){
    this.userType = JSON.parse(localStorage.getItem('usertype'));
+ this.userId.userId =  JSON.parse(localStorage.getItem('user'));
     console.log('user'+this.userType);
+    console.log('userId',this.userId);
     if(this.userType == 'service_provider'){
      this.getUserProfilePicture();
 
@@ -59,7 +66,7 @@ export class AppSidebarNavComponent implements OnInit{
   //   this.router.navigate(['/about']);
   //  }
    getUserProfilePicture(){
-    this.profileService.getUserProfilepicture()
+    this.profileService.getUserProfilepicture(this.userId)
     .then(response=>{
       this.url =response as Url;
 
@@ -87,6 +94,7 @@ export class AppSidebarNavComponent implements OnInit{
     for(let i =0; i < files.length; i++){
         formData.append("uploads[]", files[i], files[i]['name']);
     }
+    formData.append('userId',this.userId.userId );
     console.log(formData);
  this.http.post('http://localhost:3000/api/profile/updateProfilePicture',formData).toPromise()
     .then((response)=>{
@@ -121,6 +129,7 @@ export class AppSidebarNavComponent implements OnInit{
         formData.append("uploads[]", files[i], files[i]['name']);
     }
     console.log(formData);
+    formData.append('userId',this.userId.userId);
    
     this.http.post('http://localhost:3000/api/add/uploadAdd', formData).toPromise()
           .then((response)=>{

@@ -18,10 +18,18 @@ class Url{
 export class AppSidebarNaveOrganizerComponent implements OnInit {
 
   constructor(private http:Http,private router:Router,private profileService:ProfileService) { }
+  userId={
+    userId:''
 
+   }
   ngOnInit() {
+   
+    this.userId.userId =  JSON.parse(localStorage.getItem('user'));
+    console.log( 'hello'+this.userId.userId);
     this.getUserProfilePicture();
   }
+
+
   url:Url = {
     success:false,
     status: "",
@@ -33,7 +41,8 @@ export class AppSidebarNaveOrganizerComponent implements OnInit {
  
 
     getUserProfilePicture(){
-      this.profileService.getUserProfilepicture()
+      console.log('get user profile picture id '+this.userId.userId);
+      this.profileService.getUserProfilepicture(this.userId)
       .then(response=>{
         this.url =response as Url;
   
@@ -58,6 +67,7 @@ export class AppSidebarNaveOrganizerComponent implements OnInit {
      for(let i =0; i < files.length; i++){
          formData.append("uploads[]", files[i], files[i]['name']);
      }
+     formData.append('userId',this.userId.userId );
      console.log(formData);
   this.http.post('http://localhost:3000/api/profile/updateProfilePicture',formData).toPromise()
      .then((response)=>{

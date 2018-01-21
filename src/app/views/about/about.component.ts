@@ -10,7 +10,7 @@ class EditAbout{
   address:string;
   qualification:string;
   expirience:string;
-  
+  userId:string;
   }
 
 
@@ -25,7 +25,14 @@ export class AboutComponent implements OnInit {
 
   constructor(private profileService:ProfileService, private http:Http,private router:Router) { }
 userType:string;
+userId:string;
+
+UserId_1= {
+
+  userId:''
+}
   ngOnInit() {
+    this.userId = JSON.parse(localStorage.getItem('user'));
     this.userType = JSON.parse(localStorage.getItem('usertype'));
    this.getEditAbout();
   }
@@ -37,7 +44,8 @@ userType:string;
       phoneNumber:'',
       address:'',
       qualification:'',
-      expirience:''
+      expirience:'',
+      userId:''
     
     
     }
@@ -47,12 +55,14 @@ userType:string;
       phoneNumber:'',
       address:'',
       qualification:'',
-      expirience:''
+      expirience:'',
+      userId:''
 
 
     };
 
     submitEdit(){
+      this.editAbout.userId =this.userId;
 
         this.profileService.submitEditAbout(this.editAbout)
         .then(response=>{
@@ -69,8 +79,9 @@ userType:string;
     }
 
     getEditAbout(){
+      this.UserId_1.userId =this.userId;
 
-this.profileService.getEditget()
+this.profileService.getEditget(this.UserId_1)
 .then(response=>{
 
   this.editAbout =response;

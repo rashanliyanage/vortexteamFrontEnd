@@ -32,7 +32,7 @@ class Url{
         address:string;
         qualification:string;
         expirience:string;
-        
+        userId:string;
         }
         class Event{
             
@@ -68,10 +68,10 @@ uploadProfilePicture(formdata:any):Promise<Url>{
         return err;
     });
 }
-getCovePoto():Promise<coverImg>{
+getCovePoto(userId):Promise<coverImg>{
 
     console.log();
-    return this.http.get(this.webApi_getCoverPhotp, {headers: this.headers})
+    return this.http.post(this.webApi_getCoverPhotp,userId)
     .toPromise()
     .then(response=>{
      return response.json() as coverImg;
@@ -85,9 +85,9 @@ getCovePoto():Promise<coverImg>{
 
 
 
-getUserProfilepicture():Promise<Url>{
+getUserProfilepicture(userId):Promise<Url>{
     console.log();
-   return this.http.get(this.webApi_get_profile_pic, {headers: this.headers})
+   return this.http.post(this.webApi_get_profile_pic,userId)
    .toPromise()
    .then(response=>{
     return response.json() as Url;
@@ -98,8 +98,8 @@ getUserProfilepicture():Promise<Url>{
     });
 }
 
-getAllAdd():Promise<Add>{
-return this.http.get( this.webApi_getAllAdd, {headers: this.headers})
+getAllAdd(userId):Promise<Add>{
+return this.http.post( this.webApi_getAllAdd,userId)
 .toPromise().then(response=>{
 return response.json() as Add;
 
@@ -141,9 +141,9 @@ submitEditAbout(about:EditAbout):Promise<EditAbout>{
             });
 
 }
-getEditget():Promise<EditAbout>{
+getEditget(userId):Promise<EditAbout>{
     
-     return this.http.get(this.webApi_getAbout,{headers: this.headers})
+     return this.http.post(this.webApi_getAbout,userId)
                     .toPromise()
                     .then(response=>{
                     return response.json() as EditAbout;

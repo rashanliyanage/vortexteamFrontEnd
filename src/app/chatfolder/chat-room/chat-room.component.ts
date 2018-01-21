@@ -13,11 +13,11 @@ export class ChatRoomComponent implements OnInit, AfterViewChecked {
   
     ngOnInit() {
 
-      // if(!localStorage.getItem("firebase:authUser:AIzaSyD0a4zC9sfXTQnBMkJegJ1wMJ_LL822QOw:[DEFAULT]")) {
+      if(!localStorage.getItem("firebase:authUser:AIzaSyD0a4zC9sfXTQnBMkJegJ1wMJ_LL822QOw:[DEFAULT]")) {
         
-      //   this.router.navigate(['/chat/chatlogin']);
+        this.router.navigate(['/chat/chatlogin']);
         
-      // }
+      }
 
     }
   

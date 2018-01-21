@@ -19,12 +19,14 @@ class Img {
   img: string;
   url: string;
   id: string;
+  userId:string;
 
 
 }
 class coverImg {
   img: string;
   id: string;
+  
 
 }
 
@@ -62,10 +64,15 @@ export class DashboardComponent implements OnInit {
 
   coverphoto: coverImg = {
     img: '',
-    id: ''
+    id: '',
+   
   }
   imageDetailArray: Img[] = [];
 
+  userId={
+    userId:''
+
+   }  
   ngOnInit() {
     if (!localStorage.getItem("user")) {
       this.router.navigate(['/pages/login']);
@@ -73,6 +80,7 @@ export class DashboardComponent implements OnInit {
 
     }
     this.userType = JSON.parse(localStorage.getItem('usertype'));
+    this.userId.userId =  JSON.parse(localStorage.getItem('user'));
     this.notificationIdObj.userid = JSON.parse(localStorage.getItem('user'));
     console.log('user' + this.userType);
     if (this.userType == 'service_provider' || this.userType == 'organizer') {
@@ -115,6 +123,7 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       formData.append("uploads[]", files[i], files[i]['name']);
     }
+    formData.append("userId",this.userId.userId);
     console.log(formData);
     this.http.post('http://localhost:3000/api/Add_2/updateCoverPhoto', formData).toPromise()
       .then((response) => {
@@ -130,7 +139,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getAdverticement() {
-    this.profileService.getAllAdd()
+    this.profileService.getAllAdd(this.userId)
       .then(response => {
         for (var i = 0; i < response.imgArray.length; i++) {
           var newImg = new Img();
@@ -155,7 +164,7 @@ export class DashboardComponent implements OnInit {
   }
   getCoverPhoto() {
 
-    this.profileService.getCovePoto()
+    this.profileService.getCovePoto(this.userId)
       .then(response => {
         this.coverphoto = response;
 

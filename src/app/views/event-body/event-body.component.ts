@@ -3,6 +3,7 @@ import { FilterPipe} from '../filter.pipe';
 import {EventService} from '../../services/event.service';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http/src/static_response';
+import { routes } from 'app/app.routing';
 class Organizers{
 
 name:string;
@@ -54,6 +55,10 @@ eventId:''
     }
   
   ngOnInit() {
+    if(!localStorage.getItem('eventid')){
+
+      this.router.navigate(['/eventlogin']);
+    }
    
    this.eventname = JSON.parse(localStorage.getItem('eventname'));
     this.sendAddId.eventId = JSON.parse(localStorage.getItem('eventid'));
