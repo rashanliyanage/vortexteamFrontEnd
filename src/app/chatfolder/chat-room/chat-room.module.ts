@@ -11,6 +11,7 @@ import {ChatFeedComponent}from '../chat-feed/chat-feed.comoponent';
 import {ChatFormComponent}from '../chat-form/chat-form.comoponent';
 import {ChatMessageComponent}from '../chat-message/chat-message.comoponent';
 import { AngularFireModule } from 'angularfire2';
+import {FilterPipe} from '../filter.pipe'
 import {UserItem} from '../user-item/user-item.component'
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {UserItem} from '../user-item/user-item.component'
     ChatFeedComponent,
     ChatFormComponent,
     ChatMessageComponent,
-    UserItem
+    UserItem,
+    FilterPipe
   ]
 })
 export class ChatRoomModule{ }

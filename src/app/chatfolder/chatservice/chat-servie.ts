@@ -55,10 +55,11 @@ export class ChatService implements OnInit{
       this.chatMessages = this.getMessages();
       this.chatMessages.push({
         message: msg,
+        name: this.userName,
         timeSent: timestamp,
-        userName: this.userName,
+      
         //userName:"rashan",
-        email: email });
+        oemail: email });
         console.log('succes fully');
     }
   
@@ -66,7 +67,7 @@ export class ChatService implements OnInit{
       // query to create our message feed binding
       this.eventId = JSON.parse(localStorage.getItem('eventid'));
       console.log(this.eventId);
-      return this.db.list(this.eventId, {
+      return this.db.list('nipun', {
         query: {
           limitToLast: 25,
           orderByKey: true

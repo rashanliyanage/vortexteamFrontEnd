@@ -174,7 +174,7 @@ this.showmembers =false;
        this. OrganizerDtail.push(response.allOrganizerArray[i]); 
         //console.log(response.allOrganizerArray[i]);
 
-      }
+      } 
 
 console.log(this.OrganizerDtail);
 

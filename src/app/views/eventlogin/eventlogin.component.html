@@ -3,8 +3,12 @@
    <div class="col-sm-6 offset-4">
      <div class="card">
        <div class="card-header">
-        <h2 style="text-align:center;"><strong >Login event</strong></h2> 
-         
+          <div *ngIf="userType =='service_provider'?true:fasle">
+        <h2 style="text-align:center;"><strong >Login chat</strong></h2> 
+         </div>
+         <div *ngIf="userType == 'organizer'?true:fasle">
+            <h2 style="text-align:center;"><strong >Login event</strong></h2> 
+             </div>
        </div>
        <div class="card-body">
          <div class="form-group">

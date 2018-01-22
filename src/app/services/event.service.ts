@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import 'rxjs/add/operator/map';
 import { promise } from 'selenium-webdriver';
-import { Promise } from 'q';
+
 class Organizer{
 
     allOrganizerArray:string[];
@@ -32,6 +32,7 @@ export class EventService{
     private web_Api_geteventLocation = 'http://localhost:3000/api/event/getCoordinats';
     private web_Api_login = 'http://localhost:3000/api/event/login';
     private web_Api_getorganizers = 'http://localhost:3000/api/event/getorganizers';
+    private web_Api_getSp_Provider = 'http://localhost:3000/api/event/getserviceprovider';
     private web_Api_addgetorganizers = 'http://localhost:3000/api/event/addorganizers';
     registerEvent(registerevent){
 
@@ -131,6 +132,44 @@ return err;
     }
 
 
+    getAllSpProvider(){
+        console.log('in get  service service');
+return this.http.get('http://localhost:3000/api/event/getserviceprovider',{headers: this.headers})
+.toPromise()
+.then(response=>{
+   // console.log(response);
+
+return response.json() as Organizer;
+
+}).catch(err=>{
+
+console.log(err);
+return err;
+});
+
+
+    }
+
+
+
+    addSelectedSpProvider(selectedorganizer){
+        console.log('in the add serviec');
+        console.log(selectedorganizer);
+
+                return this.http.post('http://localhost:3000/api/event/addServieceProvider',selectedorganizer,{headers: this.headers})
+                .toPromise()
+                .then(response=>{
+                return response.json();
+
+                }).catch(err=>{
+
+                return err;
+
+                });
+                    }
+
+
+
     getNotification(useridobj){
         console.log(useridobj)
 
@@ -149,6 +188,7 @@ return err;
 });
 
     }
+    
 
     addSelectedOrganizer(selectedorganizer){
         console.log('in the add serviec');
@@ -165,6 +205,8 @@ return err;
 
                 });
                     }
+
+                    
 
 
 }

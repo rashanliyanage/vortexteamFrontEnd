@@ -16,18 +16,22 @@ userId:string;
   providers:[EventService]
 })
 export class EventloginComponent implements OnInit {
-
+userType:string;
   constructor( private eventService:EventService,private router:Router) { }
  eventid:string;
  UserId:string;
  isMember:boolean = false;
   ngOnInit() {
     console.log('in log');
+    if(this.userType =="organizer"){
     if((localStorage.getItem('eventid'))){
       this.router.navigate(['/eventbody']);
 
     }
+  }
+  
     this.UserId =JSON.parse(localStorage.getItem('user'));
+    this.userType = JSON.parse(localStorage.getItem('usertype'));
     
   }
   event:Event ={
@@ -52,7 +56,19 @@ localStorage.setItem('eventname',JSON.stringify(this.eventname));
 localStorage.setItem('eventid',JSON.stringify(response.eventid));
 console.log(this.eventname);
 console.log('loging succesfully');
-this.router.navigate(['/eventbody']);
+console.log(this.userType );
+if(this.userType =="service_provider"){
+  this.router.navigate(['/chat/chatlogin']);
+  console.log('in ther sevice providr if');
+  console.log(this.userType);
+}
+ if(this.userType == "organizer"){
+
+  this.router.navigate(['/eventbody']);
+  console.log('in ther organzer if');
+  console.log(this.userType);
+}
+
 
 }else if(response.success == 400){
   console.log('you are not member');

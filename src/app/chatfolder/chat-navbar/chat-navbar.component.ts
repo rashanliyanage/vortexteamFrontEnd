@@ -12,7 +12,7 @@ import * as firebase from 'firebase/app';
 })
 export class ChatNavbarComponent { 
 
-
+userType:string;
   user: Observable<firebase.User>;
   userEmail: string;
 
@@ -25,6 +25,7 @@ export class ChatNavbarComponent {
         this.userEmail = user.email;
       }
     });
+    this.userType = JSON.parse(localStorage.getItem('usertype'));
   }
   goEvent(){
 

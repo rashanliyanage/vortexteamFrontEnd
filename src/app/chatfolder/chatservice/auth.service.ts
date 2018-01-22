@@ -9,7 +9,7 @@ import { User } from '../chatmodel/user.model';
 @Injectable()
 export class  AuthService {
 
-
+  userType:string;
     private user: Observable<firebase.User>;
     private authState: any;
   
@@ -17,6 +17,7 @@ export class  AuthService {
       private db: AngularFireDatabase,
       private router: Router) {
         this.user = afAuth.authState;
+        this.userType = JSON.parse(localStorage.getItem('usertype'));
       }
   
       authUser() {
@@ -35,10 +36,19 @@ export class  AuthService {
             this.router.navigate(['/chat/chatroom']);
           });
       }
-  
+
       logout() {
+       
         this.afAuth.auth.signOut();
-        this.router.navigate(['/eventbody']);
+        console.log(this.userType);
+        if(this.userType == "service_provider"){
+          this.router.navigate(['/eventlogin']);
+        }
+        if(this.userType == 'organizer'){
+          this.router.navigate(['/eventbody']);
+        }
+      
+        
       }
   
       signUp(email: string, password: string, displayName: string) {
