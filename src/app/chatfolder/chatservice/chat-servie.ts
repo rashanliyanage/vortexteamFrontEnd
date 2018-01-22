@@ -67,7 +67,7 @@ export class ChatService implements OnInit{
       // query to create our message feed binding
       this.eventId = JSON.parse(localStorage.getItem('eventid'));
       console.log(this.eventId);
-      return this.db.list('nipun', {
+      return this.db.list('group1', {
         query: {
           limitToLast: 25,
           orderByKey: true

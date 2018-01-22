@@ -22,7 +22,7 @@ export class ChatMessageComponent {
         this.messageContent = chatMessage.message;
         this.timeStamp = chatMessage.timeSent;
         this.userEmail = chatMessage.email;
-        this.userName = chatMessage.userName;
+        this.userName = chatMessage.name;
       }
 
 
