@@ -10,13 +10,15 @@ import {RouterModule} from '@angular/router';
 import {
   FullLayoutComponent,
   SimpleLayoutComponent,
-  ChatLayoutComponent
+  ChatLayoutComponent,
+  ViewLayoutComponent
 } from './containers';
 
 const APP_CONTAINERS = [
   FullLayoutComponent,
   SimpleLayoutComponent,
-  ChatLayoutComponent
+  ChatLayoutComponent,
+  ViewLayoutComponent
 ]
 
 // Import components
@@ -29,6 +31,8 @@ import {
   AppSidebarHeaderComponent,
   AppSidebarOrganizerComponent,
   AppSidebarNaveOrganizerComponent,
+  SidebarView,
+  AppSidebarVeiwerComponent,
 
   APP_SIDEBAR_NAV
 } from './components';
@@ -47,6 +51,8 @@ const APP_COMPONENTS = [
   AppSidebarHeaderComponent,
   AppSidebarOrganizerComponent,
   AppSidebarNaveOrganizerComponent,
+  SidebarView,
+  AppSidebarVeiwerComponent,
   
   APP_SIDEBAR_NAV
 ]

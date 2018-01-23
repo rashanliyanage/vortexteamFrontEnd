@@ -1,0 +1,24 @@
+<div class ="coverPotoWrap">
+        <div class ="coverPhoto"> 
+          <img  src="data:image/PNG;base64,{{coverphoto.img}}"class ="img-thumbnail">    
+        </div>
+        </div>
+
+        <div *ngFor="let img of imageDetailArray">
+                <div class="col-sm-6 col-md-5 offset-4 ">
+                    <div class="card bodyColor">
+                      <div class="card-header">
+                        <i class="fa fa-check"></i>
+                      </div>
+                      <div class="card-body AddPic">
+                            
+                                    
+                            
+                         <img  src="data:image/PNG;base64,{{img.img}}" class ="img-thumbnail img-responsive">
+                      </div>
+                      
+                    </div>
+                  
+                  </div>
+                   </div>
+ 

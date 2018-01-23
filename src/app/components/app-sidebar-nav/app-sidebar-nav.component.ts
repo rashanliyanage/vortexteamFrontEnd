@@ -133,12 +133,13 @@ export class AppSidebarNavComponent implements OnInit{
    
     this.http.post('http://localhost:3000/api/add/uploadAdd', formData).toPromise()
           .then((response)=>{
+            window.location.reload();
             this.add =response.json() as Add ;
           console.log(this.add);
-        window.location.reload();
+  
         
           }).catch((err)=>{
-        
+          
               console.log('err');
         
           })

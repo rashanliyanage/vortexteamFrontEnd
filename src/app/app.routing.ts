@@ -6,7 +6,8 @@ import {
   FullLayoutComponent,
   SimpleLayoutComponent,
   ChatLayoutComponent,
-  FrountLayoutComponent
+  FrountLayoutComponent,
+  ViewLayoutComponent
 } from './containers';
 
 export const routes: Routes = [
@@ -86,6 +87,33 @@ export const routes: Routes = [
       }
     ]
   },
+  {
+    
+      path: 'view',
+      component: ViewLayoutComponent,
+      data: {
+        title: 'Pages'
+      },
+      children: [
+        {
+          path: 'viwerprofile',
+          loadChildren: './views/viewer-dashbord/viewer-dashbord.module#ViewerDashboardModule',
+
+
+        },
+        {
+          path: 'viweabout',
+          loadChildren: './views/viewAbout/viewAbout.module#ViewAboutdModule',
+
+
+        }
+
+
+      ]
+
+
+  }
+ 
 
 ];
 
