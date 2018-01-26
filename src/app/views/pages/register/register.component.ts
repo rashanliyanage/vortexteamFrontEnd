@@ -43,17 +43,31 @@ isRegistrationFailed: boolean = false;
       this.router.navigate(['/profile']);
     }
   }
+  viewJumbotron:boolean=false;
+  EnterTainment(){
+    this.registeruser.spCatagory ='ENTERTAINMENT'
+    this.viewJumbotron =false;
+  }
   
-
+  photography(){
+    this.registeruser.spCatagory ='PHOTOGRAPHY'
+    this.viewJumbotron =false;
+  }
+  flowers(){
+    this.registeruser.spCatagory ='FLOWERS';
+    this.viewJumbotron =false;
+  }
   isOrganizer():void{
     this.registeruser.usertype ="";
 this.registeruser.usertype ="organizer"
+
 
   }
   isSpProvider():void{
 
     this.registeruser.usertype ="";
-    this.registeruser.usertype ="service_provider"
+    this.registeruser.usertype ="service_provider";
+    this.viewJumbotron =true;
   }
 
   isAdmin():void{

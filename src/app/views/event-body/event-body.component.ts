@@ -11,6 +11,7 @@ class Organizers{
 name:string;
 id:string;
 pic:string;
+sptype:string;
 
 }
 
@@ -83,6 +84,27 @@ contentoftheEmail:''
     console.log('hear'+this.sendAddId.addeduser);
   
   
+  }
+  isChoseCatogory:boolean =false;
+  serchedType:string;
+  Entertainment(){
+    this.isChoseCatogory =true;
+    this.serchedType =null;
+    this.showalert =false;
+    this.serchedType ='ENTERTAINMENT';
+    
+  }
+  photography(){
+    this.isChoseCatogory =true;
+    this.showalert =false;
+    this.serchedType =null;
+    this.serchedType ='PHOTOGRAPHY';
+  }
+  flowers(){
+    this.isChoseCatogory =true;
+    this.serchedType =null;
+    this.showalert =false;
+    this.serchedType ='FLOWERS';
   }
 spprovidername:string ='';
 
@@ -259,10 +281,10 @@ this.sendAddId.selectedorganizerId =id;
 this.showmembers =false;
 
   }
+  showalert:boolean =false;
   valuechange($event){
 var legth = this.organizername.length;
-if(legth >=1){
-
+ if(legth >=1){
 this.showmembers =true;
 }else{
 this.showmembers =false;
@@ -273,7 +295,11 @@ this.showmembers =false;
   }
   valuechangeforsp($event){
     var legth = this.spprovidername.length;
-    if(legth >=1){
+    
+    if(this.isChoseCatogory ==false){
+      this.showalert =true;
+      
+      }else if(legth >=1){
     
     this.showSp =true;
     }else{

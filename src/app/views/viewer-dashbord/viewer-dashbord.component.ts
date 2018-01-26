@@ -42,6 +42,7 @@ class Img {
        
         this.userId.userId =    JSON.parse(localStorage.getItem('viewsp'));
         this.getCoverPhoto();
+       this. getAdverticement();
    
       
     }

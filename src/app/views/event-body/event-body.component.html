@@ -75,9 +75,13 @@
 <div class=" col-sm-6 col-md-12 mysp">
   <div class="card text-white bg-success text-center">
     <div class="card-body">
-        <input type="text" [(ngModel)]="spprovidername" class="form-control" id="company" (keyup)="valuechangeforsp($event)"placeholder="{{organizername}}">
-      <div *ngFor="let sp of   SpProviderArray |filtersp:spprovidername">
+      <span>  <input style="float:left" type="text" [(ngModel)]="spprovidername" class="form-control col-md-8" id="company" (keyup)="valuechangeforsp($event)"placeholder="{{organizername}}">
+       <button type="button" (click)="Entertainment()" class="btn btn-warning">ENTERTAINMENT</button>
+       <button type="button" (click)="photography()" class="btn btn-warning">PHOTOGRAPHY</button>
+       <button type="button" (click)="flowers()" class="btn btn-warning">FLOWERS</button></span> 
+        <div *ngFor="let sp of   SpProviderArray |filtersp:spprovidername">
           <div *ngIf ="showSp">
+            <div *ngIf ="serchedType == sp.sptype?true:false">
           <div class ="wrapp" (click)="selectsp(sp.id,sp.name)">
               <!-- <table class="table table-responsive-sm table-hover table-outline mb-0"> -->
                 <td>
@@ -97,7 +101,7 @@
          
             <!-- </table> -->
           </div>
-       
+        </div>
            
 
         </div>
@@ -105,6 +109,7 @@
       </div>
     </div>
   </div>
+  <div class="alert alert-danger" *ngIf="showalert">pleace choose a catagory for serching</div>
 </div><!--/.col-->
 
   

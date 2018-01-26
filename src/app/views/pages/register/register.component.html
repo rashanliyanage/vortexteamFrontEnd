@@ -39,32 +39,33 @@
 
                 
                 <div *ngIf ="registeruser.usertype =='service_provider'? true : false">
-                    <div class ="jumbotron">
+                  <div *ngIf ="viewJumbotron">
+                  <div class ="jumbotron">
                       
                     <div class ="row" >
-                    <div class ="input-group col-md-6">
-                        <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
-                      <input type="text" class ="form-controle" [(ngModel)]="registeruser.spCatagory" #serviceCatogory="ngModel" placeholder="enter accout number" required>
-                      
-
-                    </div>
-                    <div class ="input-group col-md-6">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-danger btn-lg btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Submit
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Photographer</a>
-                              <a class="dropdown-item" href="#">Dj</a>
-                              <a class="dropdown-item" href="#">Hotel</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                          </div>  
-
+                      <div class="col-sm-4">
+                        <div class="radio radio-danger">
+                            <label class="radio-inline ">
+                         <input type="radio" (click)="EnterTainment()" name="usertype" id="Radios1" value="Yes" ><strong> ENTERTAINMENT</strong>
+                            </label>
+                         </div>
                       </div>
-                    
+                      <div class="col-sm-4">
+                        <div class="radio radio-danger">
+                            <label class="radio-inline ">
+                         <input type="radio" (click)="photography()" name="usertype" id="Radios1" value="Yes" ><strong>PHOTOGRAPHY</strong>
+                            </label>
+                         </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="radio radio-danger">
+                            <label class="radio-inline ">
+                         <input type="radio" (click)="flowers()" name="usertype" id="Radios1" value="Yes" ><strong>FLOWERS</strong>
+                            </label>
+                         </div>
+                      </div>
                   </div>
+                 </div>
                  </div>
 
                  <div *ngIf="serviceCatogory.invalid && (serviceCatogory.dirty || serviceCatogory.touched)"
