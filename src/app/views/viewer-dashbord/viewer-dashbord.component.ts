@@ -39,9 +39,11 @@ class Img {
     ngOnInit() {
 
 
-        this.userId.userId ="5a6692ed7317311dac40eec1";
+       
+        this.userId.userId =    JSON.parse(localStorage.getItem('viewsp'));
         this.getCoverPhoto();
-        this.getAdverticement();
+   
+      
     }
 
     coverphoto: coverImg = {

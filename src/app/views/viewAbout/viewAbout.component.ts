@@ -4,6 +4,16 @@ import { ProfileService } from '../../services/serviceProvider.service';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+class EditAbout{
+    
+    name:string;
+    email:string;
+    phoneNumber:string;
+    address:string;
+    qualification:string;
+    expirience:string;
+    userId:string;
+    }
 
 @Component({
     selector: 'app-vewer-dashbord',
@@ -14,7 +24,47 @@ import 'rxjs/add/operator/catch';
   })
 
   export class ViewAbout implements OnInit {
+      userId:string;
+    constructor(private profileService:ProfileService, private http:Http,private router:Router) { }
+ngOnInit(){
 
-ngOnInit(){}
+this.UserId_1.userId =JSON.parse(localStorage.getItem('viewsp'));
+this.getEditAbout();
+    
+}
+UserId_1= {
+    
+      userId:''
+    }
+
+editAbout: EditAbout={
+    
+      name:'',
+      email:'',
+      phoneNumber:'',
+      address:'',
+      qualification:'',
+      expirience:'',
+      userId:''
+    
+    
+    }
+
+getEditAbout(){
+    this.UserId_1.userId =this.userId;
+
+this.profileService.getEditget(this.UserId_1)
+.then(response=>{
+
+this.editAbout =response;
+
+console.log(this.editAbout);
+  }).catch(err=>{
+
+    console.log('err in get about ');
+
+  });
+
+}
 
   }

@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { PagesRoutingModule } from './pages-routing.module';
-
+import {HomepageComponent} from './homepage/homepage.component';
 
 @NgModule({
   imports: [ PagesRoutingModule, FormsModule,CommonModule ],
@@ -15,6 +15,7 @@ import { PagesRoutingModule } from './pages-routing.module';
     P500Component,
     LoginComponent,
     RegisterComponent,
+    HomepageComponent
    
   ]
 })

@@ -21,13 +21,27 @@
          </div>
          
            <div class="row">
+              
              <div class="col-sm-12">
+                <div *ngIf="userType =='organizer'?true:fasle">
                <button type="button" class="btn btn-primary" (click)="loginEvent()">
                  <i class="fa fa-star"></i>&nbsp;login event
              </button>
              </div>
-           </div>
-           <div class="alert alert-danger" *ngIf="isMember">You are not a member of this event</div>
+           
+             <div *ngIf="userType =='service_provider'?true:fasle">
+              <button type="button" class="btn btn-primary" (click)="loginChat()">
+                <i class="fa fa-star"></i>&nbsp;login chat
+            </button>
+               </div>
+            
+            </div>
+          </div>
+           
+
+           <div class="alert alert-danger" *ngIf="isAddedSpProvider">You are not a member of this chat</div>
+           <div class="alert alert-danger" *ngIf="isPsswordMatch">youser name or password wrong</div>
+           <div class="alert alert-danger" *ngIf=" islogged">successfully login</div>
         
          
        </div>

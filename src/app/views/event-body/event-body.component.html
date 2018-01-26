@@ -3,9 +3,10 @@
   <!-- Breadcrumb Menu-->
   <li class="breadcrumb-menu d-md-down-none">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-      <a class="btn" routerLink="/chat/chatlogin"><i class="icon-speech"></i></a>
-      <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>
-      <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Setting</a>
+      <a class="btn" routerLink="/chat/chatlogin"><i class="icon-speech"> <button type="button" routerLink="/chat/chatlogin" class="btn btn-primary btn-lg" >GO TO CHAT</button></i></a>
+
+     
+      <button type="button" class="btn btn-danger btn-lg" (click)="logoutFromEvent()">LOGOUT FROM EVENT</button>
     </div>
   </li>
 </ol>
@@ -14,27 +15,34 @@
   <h1 style="text-align:center;">WEl COME TO {{eventname |  uppercase}}</h1> 
 
 </div>
+<div >
+    
 
- <div class="col-sm-6 col-md-6">
-  <div class="card">
-    <div class="card-header">
-      <h3>ADD MEMBERS</h3>
+     <agm-map [latitude]="coordinats.lat" [longitude]="coordinats.lng" (mapClick)="mapClick($event)">
+         <agm-marker [latitude]="coordinats.lat" [longitude]="coordinats.lng"></agm-marker>
+     </agm-map>
      
-    </div>
+   </div>
+
+  <div class="  col-sm-6 col-md-12">
+  <div class="card my-card">
+    
     <div class="card-body">
       <div class="form-group">
         <label for="company"><strong>SEARCH</strong></label>
-        <input type="text" [(ngModel)]="organizername" class="form-control" id="company" (keyup)="valuechange($event)"placeholder="{{organizername}}">
-        <span class ="buttonStyle"><button type="button" class="btn btn-primary " (click)="addOrganizer()">
-        <i class="fa fa-star"></i>&nbsp;Upload
+        <input type="text" [(ngModel)]="organizername" class="form-control" id="company" (keyup)="valuechange($event)"placeholder="{{organizername}}">  
+        <!-- <span class ="buttonStyle">
+          <button type="button" class="btn btn-primary " (click)="addOrganizer()">
+        <i class="fa fa-star"></i>&nbsp;Add members
       </button>
-    </span>
-          <div *ngFor ="let mem of OrganizerDtail | filter:organizername">
+     
+    </span> -->
+           <div *ngFor ="let mem of OrganizerDtail | filter:organizername">
          <div *ngIf ="showmembers">
            <div class ="wrapp" (click)="selectorgaizer(mem.id,mem.name)">
           <div class="d-inline-block ">
-             
-            <div class ="profilepic">
+              
+             <div class ="profilepic">
               <img  src="data:image/PNG;base64,{{mem.profilepic}}" class ="rounded-circle profilepic"> 
           </div>
           </div>
@@ -47,27 +55,100 @@
         
             
           </div>
-      </div>
-      <div class="alert alert-primary " *ngIf="isadd">success full add &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
-        <i class="fa fa-window-close" aria-hidden="true" (click)="closeAleart()"></i></div>
+      </div> 
 
+       <div class="alert alert-primary " *ngIf="isadd">success full add &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+        <i class="fa fa-window-close" aria-hidden="true" (click)="closeAleart()"></i></div>
+        <button type="button"  (click)="addOrganizer()" class="btn btn-primary btn-lg btn-block">Add organizer</button>
+        <button type="button"  (click)="DeleteOrganizer()" class="btn btn-danger btn-lg btn-block">Delete organizer</button>
       </div>
 
      
   </div>
-
  
-</div><!--/.col-->
-  <div >
-     
+ 
+</div> 
 
-      <agm-map [latitude]="coordinats.lat" [longitude]="coordinats.lng" (mapClick)="mapClick($event)">
-          <agm-marker [latitude]="coordinats.lat" [longitude]="coordinats.lng"></agm-marker>
-      </agm-map>
-      
+
+
+<div class=" col-sm-6 col-md-12 mysp">
+  <div class="card text-white bg-success text-center">
+    <div class="card-body">
+        <input type="text" [(ngModel)]="spprovidername" class="form-control" id="company" (keyup)="valuechangeforsp($event)"placeholder="{{organizername}}">
+      <div *ngFor="let sp of   SpProviderArray |filtersp:spprovidername">
+          <div *ngIf ="showSp">
+          <div class ="wrapp" (click)="selectsp(sp.id,sp.name)">
+              <!-- <table class="table table-responsive-sm table-hover table-outline mb-0"> -->
+                <td>
+             
+              <div class=" my-d-block">
+                 
+                <div class ="profilepic">
+                  <img  src="data:image/PNG;base64,{{sp.profilepic}}" class ="rounded-circle profilepic"> 
+              </div>
+              </div>
+            </td>
+              <td>
+              <div class=" d-inline-block memberName">
+               <strong> {{sp.name}}</strong> 
+              </div>
+            </td>
+         
+            <!-- </table> -->
+          </div>
+       
+           
+
+        </div>
+       
+      </div>
     </div>
+  </div>
+</div><!--/.col-->
+
+  
 
 
+<div class="offset-4 col-sm-6 myform">
+    <div class="card">
+      <div class="card-header">
+        <strong>SEND EMAIL</strong>
+      </div>
+      <div class="card-body">
+         
+          <div class="alert alert-primary" *ngIf="issuccess">successfully sent
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <i class="fa fa-window-close" aria-hidden="true" (click)="closeAleart()"></i></div>
+          <div class="alert alert-danger" *ngIf="isvaliedemail">your email is not type real email</div>
+          <div class="alert alert-danger" *ngIf="isFillAll">some field are not fill</div>
+          <div class="alert alert-danger" *ngIf="isfilled">success fully send email</div>
+          <div class="form-group ">
+          <label class="form-col-form-label" for="inputSuccess2">ENTER RECIEVER EMAIL</label>
+          <input type="text" class="form-control form-control-success" [(ngModel)] ="emailObject.recieveremail"id="inputSuccess2">
+        </div>
+        <div class="form-group ">
+          <label class="form-col-form-label" for="inputWarning2">ENTER YOUR EMAIL</label>
+          <input type="text" class="form-control form-control-warning"  [(ngModel)] ="emailObject.youremail"id="inputWarning2">
+        </div>
+        <div class="form-group ">
+          <label class="form-col-form-label" for="inputError2">ENTER PASSWORD</label>
+          <input type="password" class="form-control form-control-danger"  [(ngModel)] ="emailObject.yourPassword" id="inputError2">
+        </div>
+
+        <div class="form-group ">
+            <label class="form-col-form-label" for="inputError2">SUBJECT OF THE EMAIL</label>
+            <input type="text" class="form-control form-control-danger"  [(ngModel)] ="emailObject.subjectOfthEmai" id="inputError2">
+          </div>
+
+          <div class="form-group ">
+              <label class="form-col-form-label" for="inputError2">CONTENT OF THE EMAIL</label>
+              <input type="text" class="form-control form-control-danger"  [(ngModel)] ="emailObject.contentoftheEmail" id="inputError2">
+            </div>
+      </div>
+
+      <button type="button"  (click)="sendemail()" class="btn btn-primary btn-lg btn-block">SEND EMAIL</button>
+    </div>
+   
+  </div><!--/.col-->
 
 

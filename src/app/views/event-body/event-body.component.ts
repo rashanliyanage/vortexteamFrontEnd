@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterPipe} from '../filter.pipe';
+import {FilterPipeSp} from './filtersp'
 import {EventService} from '../../services/event.service';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http/src/static_response';
 import { routes } from 'app/app.routing';
+
 class Organizers{
 
 name:string;
@@ -11,6 +13,7 @@ id:string;
 pic:string;
 
 }
+
 @Component({
   selector: 'app-event-body',
   templateUrl: './event-body.component.html',
@@ -20,16 +23,21 @@ pic:string;
 })
 export class EventBodyComponent implements OnInit {
   OrganizerDtail:Organizers[] =[];
+  SpProviderArray:Organizers[] =[];
+  // serviecProvider:Organizers[]=[];
   eventname:string;
+  showSp:boolean =false;
   showmembers:boolean =false;
   organizername:''
   isadd:boolean = false;
+  isvaliedemail:boolean =false;
+  issuccess:boolean = false;
   sendAddId ={
     eventId:'',
     selectedorganizerId:'',
     addeduser:'' 
   }
-
+  isFillAll:boolean =false;
  coordinats ={
 lat:6.9271,
 lng:79.8612,
@@ -41,14 +49,16 @@ eventId:''
 
  }
 
+emailObject ={
+recieveremail:'',
+youremail:'',
+yourPassword:'',
+subjectOfthEmai:'',
+contentoftheEmail:''
 
 
+}
 
-
-  
-
-
-  
   constructor(private eventservice: EventService,private router:Router) { 
   
   
@@ -67,13 +77,73 @@ eventId:''
     this.sendAddId.addeduser =JSON.parse(localStorage.getItem('user'));
     this.getEventLocation();
     this.getAllOrganizer();
+    this.getAllSpProvider();
 
    
     console.log('hear'+this.sendAddId.addeduser);
   
   
   }
+spprovidername:string ='';
 
+selectsp(id,sp){
+console.log(id+''+name);
+localStorage.setItem('viewsp',JSON.stringify(id));
+this.router.navigate(["/view/viwerprofile"]);
+}
+
+validateEmail(email){
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+
+}
+sendemail(){
+
+  if(!this.emailObject.recieveremail|| !this.emailObject.youremail ||!this.emailObject.yourPassword||!this.emailObject.subjectOfthEmai||!this.emailObject.contentoftheEmail){
+    this.isFillAll =true;
+  
+
+
+  }
+
+  if(!this.validateEmail(this.emailObject.recieveremail)||!this.validateEmail(this.emailObject.youremail)){
+    console.log(this.emailObject.recieveremail);
+    console.log(this.emailObject.youremail);
+    this.isvaliedemail =true;
+
+
+  } else {
+
+        this.eventservice.sendEmail(this.emailObject)
+        .then(response=>{
+          console.log('success fully send emai');
+          console.log(response);
+          if(response.succes ==200){
+        
+
+            this.issuccess =true;
+
+          }
+
+
+        }).catch(err=>{
+
+          console.log('error send email');
+
+        });
+
+  }
+
+
+
+
+}
+logoutFromEvent(){
+
+  localStorage.removeItem('eventid');
+  localStorage.removeItem('eventname');
+  this.router.navigate(['/eventlogin']);
+}
 
   getEventLocation(){
 console.log('get event location');
@@ -110,11 +180,52 @@ console.log('err');
 
   }
 
+  getAllSpProvider(){
+    console.log('in body com');
+
+    this.eventservice.getAllSpProvider()
+    .then(response=>
+      {
+      console.log(response);
+      // this.OrganizerDtail.push(response.allOrganizerArray);
+      
+      for(var i =0;i<response.allOrganizerArray.length;i++){
+    
+       this.SpProviderArray.push(response.allOrganizerArray[i]); 
+        console.log(response.allOrganizerArray[i]);
+
+      }
+      console.log('here is sp');
+      console.log(this.SpProviderArray);
+      
+          }).catch(err=>{
+            console.log(err);
+      
+          });
+        }
+
+
   mapClick(event){
 this.coordinats.lat =event.coords.lat;
 this.coordinats.lng =event.coords.lng;
 this.saveEventlocation();
     console.log(event);
+  }
+
+  DeleteOrganizer(){
+    console.log(this.sendAddId);
+    this.sendAddId.eventId =JSON.parse(localStorage.getItem('eventid'));
+this.eventservice.deleteOrganizer(this.sendAddId)
+.then(response=>{
+console.log('success filly delete');
+
+})
+.catch(err=>{
+  console.log(err);
+
+});
+
+
   }
   closeAleart(){
 
@@ -160,6 +271,18 @@ this.showmembers =false;
 
 
   }
+  valuechangeforsp($event){
+    var legth = this.spprovidername.length;
+    if(legth >=1){
+    
+    this.showSp =true;
+    }else{
+    this.showSp =false;
+    
+    }
+    
+    
+      }
 
   getAllOrganizer(){
     console.log('in body com');

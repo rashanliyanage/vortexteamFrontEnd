@@ -39,11 +39,22 @@
         </div>
       </div>
     </div>
+    <div class="alert alert-primary" *ngIf="isadd">succesfull add</div>
     <div class ="AddButton">
     <button style="margin-bottom: 4px" (click)="addSelectedSpProvider()" class="btn btn-lg btn-flickr" type="button">
         <span>Click   To   Add</span>
       </button>
     </div>
+    <div class ="sendEmail">
+    <div class="form-group has-success">
+        <label class="form-col-form-label" for="inputSuccess2">YOUR EMAIL</label>
+        <input type="text" class="form-control form-control-success" [(ngModel)]="sendAddId.senderemail"id="inputSuccess2">
+      </div>
+      <div class="form-group has-success">
+          <label class="form-col-form-label" for="inputSuccess2">YOUR PASSWORD</label>
+          <input type="text" class="form-control form-control-success"  [(ngModel)]="sendAddId.senderpassword" id="inputSuccess2">
+        </div>
+      </div>
      </div>
    
 

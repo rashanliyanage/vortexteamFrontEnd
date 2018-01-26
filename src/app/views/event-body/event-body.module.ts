@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../filter.pipe';
 import { AgmCoreModule } from '@agm/core';
+import {FilterPipeSp} from './filtersp';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { AgmCoreModule } from '@agm/core';
       apiKey: 'AIzaSyBCKHYty_-iUFsBbsGL_TJPiO-y8o_VHc4'
     })
   ],
-  declarations: [ EventBodyComponent,FilterPipe ]
+  declarations: [ EventBodyComponent,FilterPipe,FilterPipeSp ]
 })
 export class EventBodyModule { }

@@ -13,7 +13,12 @@ import {
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/pages/login',
+    redirectTo: '/pages/homepage',
+    pathMatch: 'full',
+  },
+  {
+    path: 'view',
+    redirectTo: '/view/viwerprofile',
     pathMatch: 'full',
   },
   {
@@ -88,6 +93,7 @@ export const routes: Routes = [
     ]
   },
   {
+   
     
       path: 'view',
       component: ViewLayoutComponent,
@@ -99,11 +105,17 @@ export const routes: Routes = [
           path: 'viwerprofile',
           loadChildren: './views/viewer-dashbord/viewer-dashbord.module#ViewerDashboardModule',
 
-
+        
         },
         {
           path: 'viweabout',
           loadChildren: './views/viewAbout/viewAbout.module#ViewAboutdModule',
+
+
+        },
+        {
+          path: 'viewActivity',
+          loadChildren: './views/viewMyActivity/viewmyactivity.module#ViewMyActivitydModule',
 
 
         }

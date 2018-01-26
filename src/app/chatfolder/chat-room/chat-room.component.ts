@@ -29,9 +29,14 @@ export class ChatRoomComponent implements OnInit, AfterViewChecked {
   sendAddId ={
     eventId:'',
     selectedorganizerId:'',
+    senderemail:'',
+    senderpassword:''
     
     
   }
+  isfill:boolean;
+  isValiedEmail:boolean;
+  
   userType:string;
     ngOnInit() {
 
@@ -58,6 +63,7 @@ export class ChatRoomComponent implements OnInit, AfterViewChecked {
     }
 
     valuechange($event){
+      this.isadd =false;
       var legth = this.organizername.length;
       if(legth >=1){
       
@@ -105,8 +111,24 @@ export class ChatRoomComponent implements OnInit, AfterViewChecked {
               }
 
               isadd:boolean= false;
+              validateEmail(email){
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+              
+              }
 
               addSelectedSpProvider(){
+
+                if(this.sendAddId.senderemail==''||this.sendAddId.senderpassword==''){
+
+                    this.isfill =true;
+
+                }
+                if( !this.validateEmail(this.sendAddId.senderemail)){
+
+                  this.isValiedEmail =true;
+                }else {
+
               
                 console.log('in add');
                 console.log('hear is '+this.sendAddId.selectedorganizerId);
@@ -130,6 +152,7 @@ export class ChatRoomComponent implements OnInit, AfterViewChecked {
   });
   
     }
+  }
   }
 
 

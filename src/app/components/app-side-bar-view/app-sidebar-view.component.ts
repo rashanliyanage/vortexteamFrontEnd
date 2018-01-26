@@ -26,9 +26,10 @@ class Url{
 
 ngOnInit(){
   
+  this.userId.userId =JSON.parse(localStorage.getItem('viewsp'));
+  console.log( this.userId.userId);
   
-  
- this.userId.userId="5a6692ed7317311dac40eec1";
+//  this.userId.userId="5a6692ed7317311dac40eec1";
   this.getUserProfilePicture();
 }
 url:Url = {

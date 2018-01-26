@@ -15,6 +15,7 @@ class EventType {
 eventname:string;
 password:string;
 eventtype:EventType;
+createdUserId:string;
 
 
   }
@@ -27,8 +28,10 @@ eventtype:EventType;
 export class MainEventComponent implements OnInit {
 
   constructor( private eventService:EventService,private router:Router) { }
-
+ userId :string;
   ngOnInit() {
+
+    this.userId =JSON.parse(localStorage.getItem('user'));
   }
  
 
@@ -37,7 +40,8 @@ export class MainEventComponent implements OnInit {
   registerevent:registerEvent ={
     eventname:'',
     password:'',
-    eventtype:this.selectedEventType
+    eventtype:this.selectedEventType,
+    createdUserId:'',
 
 
   }
@@ -69,6 +73,7 @@ export class MainEventComponent implements OnInit {
   registerEvent(){
 
 console.log(this.registerevent);
+this.registerevent.createdUserId =this.userId;
 this.eventService.registerEvent(this.registerevent)
 .then(response=>{
 this.router.navigate(['eventlogin']);

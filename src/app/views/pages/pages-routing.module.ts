@@ -5,6 +5,7 @@ import { P404Component } from './404.component';
 import { P500Component } from './500.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import {HomepageComponent} from './homepage/homepage.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,13 @@ const routes: Routes = [
         component: RegisterComponent,
         data: {
           title: 'Register Page'
+        }
+      },
+      {
+        path:'homepage',
+        component:HomepageComponent,
+        data:{
+          title: 'Home Page'
         }
       }
     ]

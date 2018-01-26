@@ -20,15 +20,18 @@ userType:string;
   constructor( private eventService:EventService,private router:Router) { }
  eventid:string;
  UserId:string;
+ isPsswordMatch:boolean =false;
+ isAddedSpProvider:boolean =false;
+ islogged:boolean =false;
  isMember:boolean = false;
   ngOnInit() {
-    console.log('in log');
-    if(this.userType =="organizer"){
+    if(this.userType == "organizer"){
     if((localStorage.getItem('eventid'))){
       this.router.navigate(['/eventbody']);
 
     }
   }
+ 
   
     this.UserId =JSON.parse(localStorage.getItem('user'));
     this.userType = JSON.parse(localStorage.getItem('usertype'));
@@ -54,20 +57,10 @@ if(response.success==true){
 this.eventname = response.eventname;
 localStorage.setItem('eventname',JSON.stringify(this.eventname));
 localStorage.setItem('eventid',JSON.stringify(response.eventid));
-console.log(this.eventname);
-console.log('loging succesfully');
-console.log(this.userType );
-if(this.userType =="service_provider"){
-  this.router.navigate(['/chat/chatlogin']);
-  console.log('in ther sevice providr if');
-  console.log(this.userType);
-}
- if(this.userType == "organizer"){
-
   this.router.navigate(['/eventbody']);
   console.log('in ther organzer if');
   console.log(this.userType);
-}
+
 
 
 }else if(response.success == 400){
@@ -86,6 +79,41 @@ console.log(err);
 })
 
 }
+
+  loginChat(){
+    this.event.userId = this.UserId;
+
+this.eventService.loginChat(this.event)
+ .then(response=>{
+
+  if(response.success == true){
+    localStorage.setItem('eventname',JSON.stringify(this.eventname));
+    localStorage.setItem('eventid',JSON.stringify(response.eventid));
+    this.islogged =true;
+    this.router.navigate(['/chat/chatroom']);
+
+    console.log('succes lofin chat');
+  }
+  if(response.success ==400){
+    this.isAddedSpProvider =true;
+    console.log('you cannot login this chat');
+
+  }
+  if(response.success == false){
+    this.isPsswordMatch =true;
+
+console.log('password wrong');
+
+  }
+
+}).catch(err=>{
+
+  console.log('err');
+
+});
+
+
+  }
 
   
 

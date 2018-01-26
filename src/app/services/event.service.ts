@@ -31,9 +31,12 @@ export class EventService{
     private web_Api_saveEventLocation = 'http://localhost:3000/api/event/setCoordinats';
     private web_Api_geteventLocation = 'http://localhost:3000/api/event/getCoordinats';
     private web_Api_login = 'http://localhost:3000/api/event/login';
+    private web_Api_login_chat ='http://localhost:3000/api/event/loginchat';
+    private web_Api_send_email ='http://localhost:3000/api/event/email';
     private web_Api_getorganizers = 'http://localhost:3000/api/event/getorganizers';
     private web_Api_getSp_Provider = 'http://localhost:3000/api/event/getserviceprovider';
     private web_Api_addgetorganizers = 'http://localhost:3000/api/event/addorganizers';
+    private web_Api_deleteOrganizer ='http://localhost:3000/api/event/deleteorganizer'
     registerEvent(registerevent){
 
         return this.http.post(this.web_Api_register,registerevent,{headers: this.headers})
@@ -53,6 +56,24 @@ export class EventService{
 
     }
 
+    sendEmail(emailobject){
+
+      return  this.http.post(this.web_Api_send_email,emailobject)
+        .toPromise()
+        .then(response=>{
+
+            return response.json();
+
+        })
+        .catch(err=>{
+
+            console.log('err');
+            return err;
+
+        });
+
+    }
+
     loginEvent(event){
    
      return this.http.post(this.web_Api_login,event,{headers: this.headers})
@@ -68,6 +89,24 @@ return err;
 
 });
 
+
+
+    }
+
+
+    loginChat(event){
+
+        return this.http.post(this. web_Api_login_chat ,event)
+        .toPromise()
+        .then(response=>{
+            return response.json();
+
+        })
+        .catch(err=>{
+
+            return err;
+
+        });
 
 
     }
@@ -111,7 +150,23 @@ return err;
 
     }
 
+    deleteOrganizer(Organizer){
+console.log(Organizer);
 
+return this.http.post(this.web_Api_deleteOrganizer,Organizer)
+.toPromise()
+.then(response=>{
+    return response.json()
+
+})
+.catch(err=>{
+    return err;
+
+});
+
+   
+
+    }
 
     getAllorganizer(){
         console.log('in get service');

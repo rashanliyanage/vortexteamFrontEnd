@@ -22,15 +22,17 @@ time:Time;
 filesToUpload: Array<File> = [];
 isFiled:boolean =false;
 isSucces:boolean =false;
-
+userId:string;
 formdata:boolean;
   ngOnInit() {
    this.iventId = JSON.parse(localStorage.getItem('eventid'));
+  this.userId =  JSON.parse(localStorage.getItem('user'));
    if(!localStorage.getItem('eventid')){
       
       this.router.navigate(['/eventlogin']);
 
    }
+   this.broadcast.eventname =JSON.parse(localStorage.getItem('eventname'));
   }
 
   broadcast ={
@@ -47,6 +49,7 @@ formdata:boolean;
 {'eventtype':'private'}
 
  ]
+ 
 
  onSelect(selectedType){
   
@@ -97,12 +100,12 @@ if(files.length == 0 ){
         
     }
     formData.append("id",this.iventId);
-    formData.append("eventname",this.broadcast.eventname);
+    formData.append("eventname",JSON.parse(localStorage.getItem('eventname')));
     formData.append("eventdiscription",this.broadcast. eventdiscription);
     formData.append("eventDate",this.broadcast.eventDate);
     formData.append("eventTime",this.broadcast.eventTime);
     formData.append("eventType",this.broadcast.eventType );
-   
+    formData.append("userId",this.userId);
 
     if(this.formdata == true || formData ==''|| this.broadcast.eventdiscription =='' || this.broadcast.eventname =='' ||this.broadcast.eventDate==''|| this.broadcast.eventTime=='' ||  this.broadcast.eventType ==''){
       console.log('some feeld are not fill')
