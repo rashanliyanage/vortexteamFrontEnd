@@ -81,7 +81,7 @@ console.log(err);
 }
 
   loginChat(){
-    this.event.userId = this.UserId;
+    this.event.userId = JSON.parse(localStorage.getItem('user'));
 
 this.eventService.loginChat(this.event)
  .then(response=>{

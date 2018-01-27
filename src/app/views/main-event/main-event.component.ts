@@ -73,7 +73,7 @@ export class MainEventComponent implements OnInit {
   registerEvent(){
 
 console.log(this.registerevent);
-this.registerevent.createdUserId =this.userId;
+this.registerevent.createdUserId =JSON.parse(localStorage.getItem('user'));
 this.eventService.registerEvent(this.registerevent)
 .then(response=>{
 this.router.navigate(['eventlogin']);

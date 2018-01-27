@@ -45,7 +45,7 @@ formdata:boolean;
   }
 
   EventTypes =[
-{'eventtype':'publuc'},
+{'eventtype':'public'},
 {'eventtype':'private'}
 
  ]

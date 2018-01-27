@@ -1,0 +1,47 @@
+<div *ngFor = "let event of eventArray">
+<div class ="wrap">
+<div class="my-event">
+<div class="row myrow">
+    
+        <div class=" offset-1 col-sm-6 col-md-3 myrow">
+          <div class="card text-white bg-primary text-center">
+            <div class="card-body">
+                    <img  src="data:image/PNG;base64,{{event. eventImg}}" class ="picture"> 
+            </div>
+          </div>
+        </div><!--/.col-->
+        <div class="col-sm-6 col-md-3 myrow">
+          <div class="card text-white bg-success text-center">
+            <div class="card-body map-canvas">
+              <!-- <blockquote class="card-bodyquote"> -->
+                    <agm-map id ="maps" [styles]="styles" [latitude]="event.lat" [longitude]="event.lng" (mapClick)="mapClick($event)">
+                            <agm-marker id="maps" [latitude]="event.lat" [longitude]="event.lng"></agm-marker>
+                        </agm-map>
+                <!-- <footer>Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote> -->
+            </div>
+          </div>
+        </div><!--/.col-->
+        <div class="col-sm-6 col-md-4 myrow">
+          <div class="card text-white bg-info text-center">
+                <p></p>
+            <div class="card-body">
+                    
+                    <p><strong>{{event.eventname | uppercase}}</strong>&nbsp;&nbsp;&nbsp;{{event.discription}}.</p>
+              <blockquote class="card-bodyquote">
+               
+                <footer>
+                  <cite title="Source Title"><label>DATE -{{event.date}}</label></cite>
+                  <cite title="Source Title"><label>TIME-{{event.time}}</label></cite>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+        </div><!--/.col-->
+      
+      </div><!--/.row-->
+    </div>
+</div>
+</div>

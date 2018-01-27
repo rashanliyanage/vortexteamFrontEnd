@@ -7,6 +7,9 @@
       <a *ngIf="!(user|async)?.uid" routerLink="/chat/chatlogin" (click)="login()">Login</a>
     </span>
     <span>
+        <a  routerLink="/profile" >Profiel</a>
+      </span>
+    <span>
       <a *ngIf="!(user|async)?.uid" routerLink="/chat/chatSignup">Sign Up</a>
     </span>
     <span>
