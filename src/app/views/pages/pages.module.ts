@@ -10,6 +10,7 @@ import {HomepageComponent} from './homepage/homepage.component';
 import {Publicevent} from './publicevent/publucevent';
 import { AgmCoreModule } from '@agm/core';
 import { HttpModule } from '@angular/http';
+import {ParticipentCompoent} from './participent/participent'
 @NgModule({
   imports: [  HttpModule,PagesRoutingModule, FormsModule,CommonModule, AgmCoreModule.forRoot({
     apiKey: 'AIzaSyBCKHYty_-iUFsBbsGL_TJPiO-y8o_VHc4'
@@ -20,7 +21,8 @@ import { HttpModule } from '@angular/http';
     LoginComponent,
     RegisterComponent,
     HomepageComponent,
-    Publicevent
+    Publicevent,
+    ParticipentCompoent
    
   ]
 })

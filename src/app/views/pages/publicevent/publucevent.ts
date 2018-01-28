@@ -9,7 +9,7 @@ class Event{
     lng:number;
     date:string;
     time:string;
-
+    eventid:string;
 
 }
 
@@ -35,7 +35,11 @@ ngOnInit(){
     this.gerPublishEvent();
 }
 
+goParticipent(eventid){
+    console.log(eventid);
 
+    this.router.navigate(['/pages/participent',eventid]);
+}
 
 
 gerPublishEvent(){
@@ -43,6 +47,7 @@ console.log('in call');
 this.publishservice.getPublishEvent()
 .then(response=>{
     console.log(response.event);
+
     response.event.forEach(element => {
         console.log(element.BroadcastEvent);
         var newObject = new Event();
@@ -52,7 +57,9 @@ this.publishservice.getPublishEvent()
         newObject.eventImg =element.BroadcastEvent.eventPictureUrl;
         newObject.lat =element.eventlocation.lat;
         newObject.lng =element.eventlocation.lng;
+        newObject.eventid =element._id;
         newObject.discription =element.BroadcastEvent.eventDiscription;
+        console.log(element._id);
         this.eventArray.push(newObject);
         console.log(this.eventArray);
         

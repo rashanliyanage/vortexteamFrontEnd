@@ -1,0 +1,30 @@
+<div class ="container">
+<div class="card">
+        <div class="card-header">
+          <strong>Normal</strong> Form
+        </div>
+        <div class="card-body">
+          <form action="" method="post">
+            <div class="form-group">
+              <label for="nf-email">EMAIL</label>
+              <input type="email"  [(ngModel)]="participent.email" id="nf-email" name="nf-email" class="form-control" placeholder="Enter Email..">
+              <span class="help-block">Please enter your email</span>
+            </div>
+            <div class="form-group">
+              <label for="nf-password">PHONE NUMBER</label>
+              <input type="password"  [(ngModel)]="participent.phonenumber" id="nf-password" name="nf-password" class="form-control" placeholder="Enter Password..">
+              <span class="help-block">Please enter your phone number</span>
+            </div>
+            <div class="form-group">
+                    <label for="nf-password">NAME</label>
+                    <input type="password"   [(ngModel)]="participent.name"id="nf-password" name="nf-password" class="form-control" placeholder="Enter Password..">
+                    <span class="help-block">Please enter your name</span>
+                  </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button type="submit" (click)="submitParticipent()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> confirme</button>
+          <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+        </div>
+      </div>
+    </div>

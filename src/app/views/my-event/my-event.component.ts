@@ -5,9 +5,12 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 class Event {
   
-    EventTheamArray:string[];
-    eventNameArray:string[];
-    eventDiscriptionArray:string[];
+  adzname:string;
+  priceforservice:string;
+  adzdescription:string;
+  contactnumbers:string;
+  adzpicurl: string;
+  picurl: string;
   
   }
   class EventDetail{
@@ -17,6 +20,7 @@ class Event {
 
 
   }
+  
 @Component({
   selector: 'app-my-event',
   templateUrl: './my-event.component.html',
@@ -24,11 +28,18 @@ class Event {
   providers:[ProfileService]
 })
 export class MyEventComponent implements OnInit {
-
+myeventArray:Event[]=[];
   constructor(private http:Http,private profileService:ProfileService) { }
 
   ngOnInit() {
-    this.getEvent();
+    this.event.userId =JSON.parse(localStorage.getItem('user'));
+    this.getmyevent();
+  
+  }
+
+  User= {
+
+    UserId:''
   }
   filesToUpload: Array<File> = [];
   eventDetailArray:EventDetail[]=[];
@@ -39,7 +50,9 @@ export class MyEventComponent implements OnInit {
 
     eventname:'',
     eventdiscription:'',
-    eventtheam:''
+    phonenumber:'',
+    price:'',
+    userId:''
 
   }
   eventTheam:'';
@@ -62,11 +75,18 @@ if(files.length == 0 ){
       
         formData.append("uploads[]", files[i], files[i]['name']);
     }
-    if(this.formdata == true || formData ==''|| this.event.eventdiscription =='' || this.event.eventname ==''){
+    formData.append("eventname",this.event.eventname);
+    formData.append("eventdiscription",this.event.eventdiscription);
+    formData.append("phonenumber",this.event.phonenumber);
+    formData.append("price",this.event.price);
+    formData.append("userId",this.event.userId);
+    
+
+    if(this.formdata == true || formData ==''|| this.event.eventdiscription =='' || this.event.eventname =='' ||this.event.phonenumber==''||this.event.price==''){
       console.log('some feeld are not fill')
 } else{
 
-    this.http.post('http://localhost:3000/api/Add_2/uploadEventPhoto',formData)
+    this.http.post('http://localhost:3000/api/Add_2/myeventupload',formData)
     .toPromise()
     .then(response=>{
       //console.log(response);
@@ -78,47 +98,40 @@ if(files.length == 0 ){
 
     });
     
-    
-
-    this.profileService.uploadEventData(this.event)
-   .then(response=>{
-     console.log('upload succcess in event');
-     window.location.reload();
-   }).catch(err=>{
-
-
-    console.log('event catch');
-   });
-    
   }
   }
-getEvent(){
 
-this.profileService.getEvent()
-.then(response=>{
-  console.log('in then');
+  getmyevent(){
+    this.User.UserId =JSON.parse(localStorage.getItem('user'));
   
-  //  console.log(response.eventDiscriptionArray);
-  //  console.log(response.EventTheamArray);
- 
- for(var i =0;i<response.eventNameArray.length;i++){
-          var eventdetail =new EventDetail();
-           
-         //console.log( response.eventNameArray[(response.eventNameArray.length-1)-i]);
-        eventdetail.eventname = response.eventNameArray[(response.eventNameArray.length-1)-i];
-        eventdetail.eventdiscription = response.eventDiscriptionArray[(response.eventNameArray.length-1)-i];
-       eventdetail.eventtheam =response.EventTheamArray[(response.eventNameArray.length-1)-i];
-       this.eventDetailArray.push(eventdetail);
-         
- }
- console.log(this.eventDetailArray);
 
-}).catch(err=>{
-
-  console.log('event catch');
+this.profileService.getMyevent(this.User)
+.then(response=>{
+console.log(response);
+console.log(response.adz);
+response.adz.adz.forEach(element => {
+  var myevent = new Event();
+  myevent.adzname =element.adzname;
+  myevent.adzdescription =element.adzdescription;
+  myevent.picurl=element.picurl;
+  myevent.contactnumbers =element.contactnumbers;
+  myevent.priceforservice =element.priceforservice;
+  this.myeventArray.push(myevent);
+  
 });
+console.log(this.myeventArray);
 
-}
+  console.log('success get myevent');
+})
+.catch(err=>{
+
+  console.log('error get my event');
+})
+
+
+
+  }
+
 
   fileChangeEvent(fileInput: any) {
     

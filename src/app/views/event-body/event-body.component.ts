@@ -14,6 +14,11 @@ pic:string;
 sptype:string;
 
 }
+class Members{
+  id:string;
+  name:string;
+  img:string;
+}
 
 @Component({
   selector: 'app-event-body',
@@ -25,6 +30,7 @@ sptype:string;
 export class EventBodyComponent implements OnInit {
   OrganizerDtail:Organizers[] =[];
   SpProviderArray:Organizers[] =[];
+  members:Members[] =[];
   // serviecProvider:Organizers[]=[];
   eventname:string;
   showSp:boolean =false;
@@ -59,6 +65,10 @@ contentoftheEmail:''
 
 
 }
+eventId={
+
+  eventId:''
+}
 
   constructor(private eventservice: EventService,private router:Router) { 
   
@@ -79,6 +89,7 @@ contentoftheEmail:''
     this.getEventLocation();
     this.getAllOrganizer();
     this.getAllSpProvider();
+    this.geteventorganizer();
 
    
     console.log('hear'+this.sendAddId.addeduser);
@@ -105,6 +116,33 @@ contentoftheEmail:''
     this.serchedType =null;
     this.showalert =false;
     this.serchedType ='FLOWERS';
+  }
+
+  geteventorganizer(){
+    this.eventId.eventId =JSON.parse(localStorage.getItem('eventid'));
+
+this.eventservice.geteventorganizer(this.eventId)
+.then(response=>{
+
+  console.log('succes get');
+  console.log(response);
+  response.organizers.forEach(element => {
+    console.log(element);
+    var object = new Members();
+    object.id =element._id;
+    object.name =element.firstname +' '+ element.lastname;
+    object.img =element. profileData. profileurl;
+    this.members.push(object);
+     
+    
+  });
+  console.log(this.members);
+})
+.catch(response=>{
+
+  console.log('error get organizer');
+});
+
   }
 spprovidername:string ='';
 

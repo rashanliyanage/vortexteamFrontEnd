@@ -1,5 +1,5 @@
-<div *ngFor = "let event of eventArray">
-<div class ="wrap">
+<div *ngFor = "let event of eventArray " (click)="goParticipent(event.eventid)">
+<div class ="wrap" >
 <div class="my-event">
 <div class="row myrow">
     

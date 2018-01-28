@@ -65,11 +65,8 @@ localStorage.setItem('eventid',JSON.stringify(response.eventid));
 
 }else if(response.success == 400){
   console.log('you are not member');
-
+  this.isMember =true;
 }
-
-this.isMember =true;
-
 
 
 }).catch(err=>{

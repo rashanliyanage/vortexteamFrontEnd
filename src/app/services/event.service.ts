@@ -56,6 +56,22 @@ export class EventService{
 
     }
 
+  
+    geteventorganizer(eventID){
+
+        return this.http.post('http://localhost:3000/api/event/getaddedorganizsers',eventID)
+        .toPromise()
+        .then(response=>{
+            console.log(response);
+            return response.json();
+
+        })
+        .catch(err=>{
+
+            console.log(err);
+        });
+
+    }
     
     sendEmail(emailobject){
 

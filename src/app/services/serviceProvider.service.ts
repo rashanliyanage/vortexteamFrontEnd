@@ -83,7 +83,24 @@ getCovePoto(userId):Promise<coverImg>{
 
 }
 
+   getMyevent(userId){
+       console.log(userId);
+    
+            return this.http.post('http://localhost:3000/api/Add_2/getmyevent',userId)
+            .toPromise()
+            .then(response=>{
+                return response.json();
 
+            })
+            .catch(err=>{
+
+                console.log('error get my event in service');
+
+            })
+
+    
+    
+        }
 
 getUserProfilepicture(userId):Promise<Url>{
     console.log();

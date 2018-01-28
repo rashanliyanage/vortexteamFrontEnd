@@ -6,7 +6,8 @@ import { P500Component } from './500.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {HomepageComponent} from './homepage/homepage.component';
-import {Publicevent} from './publicevent/publucevent'
+import {Publicevent} from './publicevent/publucevent';
+import {ParticipentCompoent} from './participent/participent'
 
 const routes: Routes = [
   {
@@ -54,6 +55,14 @@ const routes: Routes = [
       {
         path:'publicevent',
         component:Publicevent,
+        data:{
+          title: 'Home Page'
+        },
+        
+      },
+      {
+        path:'participent/:eventid',
+        component:ParticipentCompoent,
         data:{
           title: 'Home Page'
         },

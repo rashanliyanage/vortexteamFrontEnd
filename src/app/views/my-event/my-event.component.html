@@ -25,14 +25,28 @@
                   
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="name"><strong>event Name</strong></label>
+                        <label for="name"><strong>EVENT NAME</strong></label>
                         <input type="text"  [(ngModel)] ="event.eventname"class="form-control" id="name" placeholder="">
                       </div>
                       
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="name"><strong>event discriptions</strong></label>
+                        <label for="name"><strong>PRICE</strong></label>
+                        <input type="text"  [(ngModel)] ="event.price"class="form-control" id="name" placeholder="">
+                      </div>
+                      
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="name"><strong>PHONE NUMBER</strong></label>
+                        <input type="text"  [(ngModel)] ="event.phonenumber"class="form-control" id="name" placeholder="">
+                      </div>
+                      
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="name"><strong>EVENT DISCRIPTION</strong></label>
                         <textarea class="form-control" [(ngModel)] ="event.eventdiscription"  id="exampleTextarea" placeholder="" rows="3"></textarea>
                       </div>
                       
@@ -65,27 +79,41 @@
 </div>
 
 </div> -->
-<div class="span12">
-    
-            <!-- Changed from `hidden` to `auto`. -->
-            <div style="overflow:auto;width:100%;">
-    
-                <!-- This is the div that does the trick: -->
-                <div *ngFor = "let event of eventDetailArray">
-                <div style="" class= "eventWrapper">
-                  
-                    
-                        
-                <div style="display:inline-block;" class=" eventImg">
-                    <img  src="data:image/PNG;base64,{{event.eventtheam}}" class ="img-thumbnail img-responsive eventImg">
-                </div>
-                <div style="display:inline-block;" class=" eventbody ">
-                  <div class="eventname"><h3>{{event.eventname}}</h3></div>  
-                   <div class="eventDiscriptions"><p>{{event.eventdiscription}}</p></div> 
-                </div>
-              </div>
-                    </div>
-    
-                </div>
-    
+ <div class ="myclass" *ngFor ="let event of myeventArray">
+   
+  <div class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="card">
+        <div class="card-body">
+            <img  src="data:image/PNG;base64,{{event.picurl}}"  class ="addPic"> 
+          
+       
+          
+        </div>
+      </div>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-md-9">
+      <div class="card">
+          <div class="h2 text-muted text-middle my-topic">
+              {{event.adzname}} 
+          </div>
+        <div class="card-body">
+        
+            {{event.adzdescription}}
          
+         
+          <div class="h4 mb-0"><h3>RS /=</h3 ><h3>{{event.priceforservice}}</h3></div>
+          <small class="text-muted text-uppercase font-weight-bold">tel--{{event.contactnumbers}}</small>
+          <div class="progress progress-xs mt-3 mb-0">
+ 
+            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{event.contactnumbers}}</div>
+          </div>
+        </div>
+      </div>
+    </div><!--/.col-->
+  
+
+  
+
+  </div><!--/.row-->
+</div>

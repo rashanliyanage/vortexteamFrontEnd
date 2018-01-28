@@ -157,3 +157,28 @@
   </div><!--/.col-->
 
 
+
+   <div class ="wrapper">
+     <div class ="header"><h3>EVENT MEMBERS</h3>
+    <div *ngFor ="let member of members ">
+      
+          <div class ="wrapp" >
+         <div class="d-inline-block ">
+             
+            <div class ="profilepic">
+             <img  src="data:image/PNG;base64,{{member.img}}"  class ="rounded-circle profilepic"> 
+         </div>
+         </div>
+         <div class="d-inline-block memberName ">
+          <strong>{{member.name}}</strong> 
+         
+         </div>
+         
+         <div class="d-inline-block memberName1 ">
+            <button type="button" class="btn btn-danger my-button">Danger</button>
+           
+           </div>
+       </div>
+      </div>
+         </div>
+        </div>
