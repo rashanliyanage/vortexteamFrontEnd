@@ -10,6 +10,7 @@ export class ChatService implements OnInit{
 
 
   eventId:string ;
+  eventname:string;
     user: firebase.User;
     chatMessages: FirebaseListObservable<ChatMessage[]>;
     chatMessage: ChatMessage;
@@ -33,7 +34,9 @@ export class ChatService implements OnInit{
       }
     ngOnInit() {
 
-      this.eventId ==JSON.parse(localStorage.getItem('eventid'));
+
+      this.eventId==JSON.parse(localStorage.getItem('eventid'));
+
       console.log(this.eventId);
     }
     getUser() {
@@ -65,9 +68,9 @@ export class ChatService implements OnInit{
   
     getMessages(): FirebaseListObservable<ChatMessage[]> {
       // query to create our message feed binding
-      this.eventId = JSON.parse(localStorage.getItem('eventid'));
+      this.eventname = JSON.parse(localStorage.getItem('eventname'));
       console.log(this.eventId);
-      return this.db.list('group1', {
+      return this.db.list(this.eventname, {
         query: {
           limitToLast: 25,
           orderByKey: true

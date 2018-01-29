@@ -84,10 +84,11 @@ this.eventService.loginChat(this.event)
  .then(response=>{
 
   if(response.success == true){
-    localStorage.setItem('eventname',JSON.stringify(this.eventname));
+    console.log();
+    localStorage.setItem('eventname',JSON.stringify(response.eventname));
     localStorage.setItem('eventid',JSON.stringify(response.eventid));
     this.islogged =true;
-    this.router.navigate(['/chat/chatroom']);
+    this.router.navigate(['/chat/chatlogin']);
 
     console.log('succes lofin chat');
   }

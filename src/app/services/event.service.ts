@@ -55,11 +55,46 @@ export class EventService{
 
 
     }
+    getAdminEvent(userId){
 
+        return this.http.post('http://localhost:3000/api/event/getadmineventdata',userId)
+        .toPromise()
+        .then(response=>{
+
+            return response.json();
+        })
+        .catch(err=>{
+
+            console.log('error get  admin in service');
+
+        });
+
+
+
+    }
+
+    getSubEvent(userId){
+
+           return this.http.post('http://localhost:3000/api/event/addorgaizersubevent',userId)
+            .toPromise()
+            .then(response=>{
+                return response.json();
+
+            })
+            .catch(err=>{
+
+                console.log('error get sub event');
+
+            })
+            
+            ;
+
+
+    }
   
     geteventorganizer(eventID){
 
-        return this.http.post('http://localhost:3000/api/event/getaddedorganizsers',eventID)
+        return this.http.post('http://localhost:3000/api/event/getaddedmyorganizsers',eventID)
         .toPromise()
         .then(response=>{
             console.log(response);
@@ -123,6 +158,22 @@ return err;
 
             return err;
 
+        });
+
+
+    }
+
+
+    getparticipent(eventid){
+       return  this.http.post('http://localhost:3000/api/event/getparticipent',eventid)
+        .toPromise()
+        .then(response=>{
+            return response.json();
+
+        })
+        .catch(err=>{
+
+            console.log('error get participent');
         });
 
 

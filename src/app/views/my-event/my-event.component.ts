@@ -89,7 +89,7 @@ if(files.length == 0 ){
     this.http.post('http://localhost:3000/api/Add_2/myeventupload',formData)
     .toPromise()
     .then(response=>{
-      //console.log(response);
+      window.location.reload();
       
     
     }).catch(err=>{

@@ -14,6 +14,12 @@ pic:string;
 sptype:string;
 
 }
+class Participent{
+  name:string;
+  email:string;
+  phonenumber:string;
+
+}
 class Members{
   id:string;
   name:string;
@@ -30,6 +36,7 @@ class Members{
 export class EventBodyComponent implements OnInit {
   OrganizerDtail:Organizers[] =[];
   SpProviderArray:Organizers[] =[];
+  participentArray:Participent[] =[];
   members:Members[] =[];
   // serviecProvider:Organizers[]=[];
   eventname:string;
@@ -70,6 +77,8 @@ eventId={
   eventId:''
 }
 
+
+
   constructor(private eventservice: EventService,private router:Router) { 
   
   
@@ -90,6 +99,7 @@ eventId={
     this.getAllOrganizer();
     this.getAllSpProvider();
     this.geteventorganizer();
+    this.getparticipent();
 
    
     console.log('hear'+this.sendAddId.addeduser);
@@ -240,6 +250,35 @@ console.log('err');
 
   }
 
+  getparticipent(){
+
+    this.eventId.eventId =JSON.parse(localStorage.getItem('eventid'));
+    console.log('after check'+ this.eventId.eventId);
+    this.eventservice.getparticipent(this.eventId)
+    .then(response=>{
+      console.log(response);
+      console.log(response.participent.participent);
+      response.participent.participent.forEach(participent=>{
+              var newparticipent = new Participent();
+              newparticipent.email =participent.participentemail;
+              newparticipent.name =participent.participentname;
+              newparticipent.phonenumber =participent.participentphonenumber;
+              this.participentArray.push(newparticipent);
+
+      });
+      console.log('get participent'+response.participent);
+      console.log(this.participentArray);
+    })
+    .catch(err=>{
+
+      console.log('error get participent');
+
+    })
+  }
+
+
+
+
   getAllSpProvider(){
     console.log('in body com');
 
@@ -298,6 +337,7 @@ this.eventservice.addSelectedOrganizer(this.sendAddId)
 console.log(response);
 if(response.success==true){
   this.isadd =true;
+  window.location.reload();
 }else{
 this.isadd =false;
 

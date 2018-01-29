@@ -8,18 +8,20 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 import {EventService} from '../../services/event.service';
-class getNotificationObject {
-  
-  notification:string;
-  eventId:string;
-  addedorgnizerProfilePic:string;
-  
-  }
+
 class Img {
   img: string;
   url: string;
   id: string;
   userId:string;
+
+
+}
+class AdminEvent{
+  eventid:string;
+  eventname:string;
+  eventimg:string;
+  eventdisctription:string;
 
 
 }
@@ -32,13 +34,16 @@ class coverImg {
 
 
 @Component({
-  templateUrl: 'dashboard.component.html',
+  selector: 'app-my-dashboard',
+  templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [ProfileService,EventService]
 
 })
 export class DashboardComponent implements OnInit {
   filesToUpload: Array<File> = [];
+  AdminEventArray:AdminEvent[] =[];
+  Subevent:AdminEvent[]  =[];
   constructor(private eventservice:EventService,private profileService: ProfileService, private http: Http, private router: Router) {
 
   }
@@ -49,7 +54,7 @@ export class DashboardComponent implements OnInit {
   }
   isClickedCoverButton = false;
   shownotificationview:boolean =false;
-  getNotifications:getNotificationObject[] =[];
+
   count: string;
   userType: string;
   User: boolean;
@@ -59,6 +64,12 @@ export class DashboardComponent implements OnInit {
     img: '',
     url: '',
     id: ''
+
+  }
+
+  AdminId ={
+    id:''
+
 
   }
 
@@ -94,11 +105,10 @@ export class DashboardComponent implements OnInit {
 
     this.getAdverticement();
     this.getCoverPhoto();
+   this. getAdminEvent()
+   this.getSubEvent();
   }
-  getnotification() {
 
-    this.getNotification();
-   }
 
   deleteImages(url: any, id: any) {
 
@@ -112,6 +122,67 @@ export class DashboardComponent implements OnInit {
       }).catch(err => {
         console.log(err);
       });
+
+
+  }
+  getSubEvent(){
+    this.AdminId.id =JSON.parse(localStorage.getItem('user'));
+    this.eventservice.getSubEvent(this.AdminId)
+    .then(response=>{
+      console.log("success get sub event");
+      console.log(response);
+      response.events.forEach(element => {
+        console.log(element);
+
+        var newobject =  new AdminEvent();
+        newobject.eventid = element._id;
+        newobject.eventname =element.BroadcastEvent.eventname;
+        newobject.eventimg =element.BroadcastEvent.eventPictureUrl;
+        newobject.eventdisctription =element.BroadcastEvent.eventDiscription;
+        
+        this.Subevent.push(newobject);
+       
+        
+      });
+      console.log(this.Subevent);
+
+
+    })
+    .catch(err=>{
+      console.log('eror get sub event');
+
+    });
+
+  }
+
+
+  getAdminEvent(){
+    this.AdminId.id =JSON.parse(localStorage.getItem('user'));
+      this.eventservice.getAdminEvent(this.AdminId)
+      .then(response=>{
+        console.log(response.events);
+        console.log('succefully get admin event');
+        response.events.forEach(element => {
+          console.log(element);
+
+          var newobject =  new AdminEvent();
+          newobject.eventid = element._id;
+          newobject.eventname =element.BroadcastEvent.eventname;
+          newobject.eventimg =element.BroadcastEvent.eventPictureUrl;
+          newobject.eventdisctription =element.BroadcastEvent.eventDiscription;
+          
+          this.AdminEventArray.push(newobject);
+         
+          
+        });
+        console.log(this.AdminEventArray);
+
+      })
+      .catch(err=>{
+        console.log('error get admin');
+
+      })
+
 
 
   }
@@ -180,30 +251,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  getNotification(){
-    this.eventservice.getNotification(this.notificationIdObj)
-    .then(response=>{
-      console.log(response.notificationMyArray);
-      this.getNotifications.length =0;
-      for(var i=0;i<response.notificationMyArray.length;i++){
-        this. getNotifications.push(response.notificationMyArray[i]);
-        console.log(response.notificationMyArray[i]);
-
-
-
-      }
-      console.log(this. getNotifications);
-
-
-    }).catch(err=>{
-
-  console.log(err);
-
-
-    });
-
-
-  }
+  
 
 
   fileChangeEvent(fileInput: any) {

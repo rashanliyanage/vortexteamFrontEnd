@@ -68,6 +68,7 @@ UserId_1= {
         .then(response=>{
           this.editAbout =response;
          console.log(this.editAbout);
+         window.location.reload();
 
         }).catch(err=>{
           console.log('err submit ');

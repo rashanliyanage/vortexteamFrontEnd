@@ -46,7 +46,7 @@ isRegistrationFailed: boolean = false;
   viewJumbotron:boolean=false;
   EnterTainment(){
     this.registeruser.spCatagory ='ENTERTAINMENT'
-    this.viewJumbotron =false;
+   this.viewJumbotron =false;
   }
   
   photography(){

@@ -1,3 +1,5 @@
+
+<div *ngIf="userType=='service_provider'?true:fasle">
 <div class ="coverPotoWrap">
     <div class ="coverPhoto"> 
       <img  src="data:image/PNG;base64,{{coverphoto.img}}"class ="img-thumbnail">    
@@ -34,40 +36,111 @@
     </div>
   
   </div>
-   </div>  
-   <!-- <button class ="btn btn-primary" (click)="getnotification()"> see notification</button>
-   -->
+   </div> 
+   
+  </div>
+</div>
 
 
-   <!-- <div class="col-sm-6 col-md-4">
-      <div class="card">
-        <div class="card-header">
-          Card with label
-          <span class="badge badge-success float-right">Success</span>
+
+  
+
+
+
+
+  <div *ngIf="userType =='organizer'?true:fasle">
+      <div *ngIf ="AdminEventArray.length ==0 && Subevent.length ==0?true:false">
+          
+            <p>No events yet!!</p> 
+            <p>Let's Organize Events By creating Events</p>
         </div>
-        <div *ngFor="let notificaton of getNotifications">
-            <div class="d-inline-block ">
-                
-                <div class="avatar">
-                    <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"> -->
-                    <!-- <img  src="data:image/PNG;base64,{{notificaton.addedorganizerpropic}}" class ="img-avatar">   
-                    <span class="avatar-status badge-success"></span>
-                  </div>
+      <div *ngIf ="AdminEventArray.length!=0?true:false">
+          <h2>creater event</h2>
+       </div>
+ 
+    <div  *ngFor ="let adminevent of AdminEventArray">
+ 
+     <div class="row">
+       <div class="col-sm-6 col-md-3">
+         <div class="card">
+           <div class="card-body">
+               <img  src="data:image/PNG;base64,{{adminevent.eventimg}}"  class ="addPic"> 
+             
+          
+             
+           </div>
+         </div> 
+       </div>
+       <div class="col-sm-6 col-md-9">
+         <div class="card">
+             <div class="h2 text-muted text-middle my-topic">
+                 {{adminevent.eventname}} 
              </div>
-             <div class="d-inline-block memberName ">
-                <div class="text-truncate font-weight-bold"></div>
-                <small class="text-muted">{{notificaton.notification}}</small>
-               </div>
-       
+           <div class="card-body">
+           
+               {{adminevent.eventdisctription}}
+            
+            
+             <div class="h4 mb-0"><h3></h3></div>
+             <small class="text-muted text-uppercase font-weight-bold"></small>
+             <div class="progress progress-xs mt-3 mb-0">
+    
+               <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+             </div>
+           </div>
+         </div>
+       </div>
+     
+   
+   
+     </div> 
+   </div>
+   <div *ngIf ="Subevent.length!=0?true:false">
+      <h2>sub event</h2>
+   </div>
+   
+   
+ 
+   <div  *ngFor ="let adminevent of Subevent">
+   <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="card">
+          <div class="card-body">
+              <img  src="data:image/PNG;base64,{{adminevent.eventimg}}"  class ="addPic"> 
+            
          
-        </div>
+            
+          </div>
+        </div> 
+      </div>
+      <div class="col-sm-6 col-md-9">
+        <div class="card">
+            <div class="h2 text-muted text-middle my-topic">
+                {{adminevent.eventname}} 
+            </div>
+          <div class="card-body">
+          
+              {{adminevent.eventdisctription}}
+           
+           
+            <div class="h4 mb-0"><h3>RS /=</h3 ><h3></h3></div>
+            <small class="text-muted text-uppercase font-weight-bold"></small>
+            <div class="progress progress-xs mt-3 mb-0">
+   
+              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>  -->
-
-
-
-
     
   
-   
+  
+    </div> 
+   </div>
+  </div>
+
+
+
+
+ 
+
